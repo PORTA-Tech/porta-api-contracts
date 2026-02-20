@@ -1,0 +1,23 @@
+﻿openapi: 3.0.3
+info:
+  title: PORTA Control Plane API
+  version: 1.0.0
+paths:
+  /v1/rollout/state:
+    get:
+      summary: Get current rollout state
+      responses:
+        '200':
+          description: Rollout state payload
+  /v1/config/submit:
+    post:
+      summary: Submit signed configuration envelope
+      responses:
+        '202':
+          description: Accepted for validation
+  /v1/config/ledger:
+    get:
+      summary: Query immutable config ledger
+      responses:
+        '200':
+          description: Ledger records
