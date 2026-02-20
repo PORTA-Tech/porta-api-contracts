@@ -17,6 +17,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "check": "tsc -p tsconfig.json --noEmit",
+    "test": "node -e \"console.log('No tests defined')\"",
     "prepare": "npm run build",
     "prepack": "npm run build"
   },
