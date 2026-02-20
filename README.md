@@ -1,15 +1,18 @@
-﻿# porta-api-contracts
+# porta-api-contracts
 
 Shared DTOs and OpenAPI contracts for PORTA Fleet Control Plane.
 
 ## Scope
-- Single source of truth for API shapes used by:
-  - `porta-control-plane` (8A)
-  - `porta-operations-console` (8B)
+- Single source of truth for API/data shapes used by `porta-control-plane` and `porta-operations-console`
+- DTOs for config envelopes, rollout state, SLO metrics, audit events, and node identity
+- OpenAPI specs for control-plane and rollout endpoints
 
-## Versioning Policy
-- `config_seq` is authoritative for rollout ordering and anti-replay.
-- Breaking DTO/OpenAPI changes require a major version bump.
-- Additive, backward-compatible fields require a minor version bump.
-- Patch version is for non-schema fixes and docs.
-- Deprecated fields must be documented for at least one minor cycle before removal.
+## Versioning
+- `config_seq` is authoritative for ordering and anti-replay
+- Breaking contract changes: major version
+- Additive backward-compatible changes: minor version
+- Non-schema/documentation fixes: patch version
+
+## OpenAPI Files
+- `src/openapi/control-plane.yaml`
+- `src/openapi/rollout.yaml`
