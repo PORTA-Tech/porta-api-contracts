@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://porta.dev/contracts/control/timeseries-record.schema.json",
+  "title": "ControlPlaneTimeSeriesRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": { "const": "ControlPlaneTimeSeriesRecord" },
+    "schema_version": { "const": "1.0.0" },
+    "record_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "schema_name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 128
+    },
+    "validated_schema_version": { "$ref": "../shared/common-defs.schema.json#/$defs/semver" },
+    "producer_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+    },
+    "timestamp": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" },
+    "ingestion_time": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" },
+    "payload": { "type": "object", "minProperties": 1 },
+    "payload_canonical": { "type": "string", "minLength": 2, "maxLength": 131072 },
+    "validation_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "signature_hash": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+    "signature_verification_result": {
+      "enum": [
+        "verified",
+        "not_required",
+        "invalid_signature",
+        "unknown_key",
+        "revoked_key"
+      ]
+    },
+    "immutability_mode": { "enum": ["mutable", "append_only", "worm"] }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "record_id",
+    "schema_name",
+    "validated_schema_version",
+    "producer_id",
+    "timestamp",
+    "ingestion_time",
+    "payload",
+    "payload_canonical",
+    "validation_hash",
+    "signature_verification_result",
+    "immutability_mode"
+  ]
+}

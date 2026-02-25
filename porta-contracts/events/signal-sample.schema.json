@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://porta.dev/contracts/events/signal-sample.schema.json",
+  "title": "SignalSampleEvent",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": { "const": "SignalSampleEvent" },
+    "schema_version": { "const": "1.0.0" },
+    "event_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "machine_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "event_type": { "const": "signal.sample" },
+    "timestamp": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" },
+    "ingestion_timestamp": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sample_interval_ms": { "type": "integer", "minimum": 1, "maximum": 60000 },
+        "keyboard_interval_ms": { "type": "number", "minimum": 0 },
+        "mouse_acceleration": { "type": "number", "minimum": 0 },
+        "scroll_velocity": { "type": "number" },
+        "focus_switch_count": { "type": "integer", "minimum": 0 },
+        "idle_fragmentation": { "type": "number", "minimum": 0 },
+        "notification_reaction_ms": { "type": "number", "minimum": 0 },
+        "config_change_count": { "type": "integer", "minimum": 0 }
+      },
+      "required": [
+        "sample_interval_ms",
+        "keyboard_interval_ms",
+        "mouse_acceleration",
+        "scroll_velocity",
+        "focus_switch_count",
+        "idle_fragmentation",
+        "notification_reaction_ms",
+        "config_change_count"
+      ]
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "event_id",
+    "machine_id",
+    "event_type",
+    "timestamp",
+    "ingestion_timestamp",
+    "payload"
+  ]
+}

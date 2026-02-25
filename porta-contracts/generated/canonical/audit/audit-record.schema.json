@@ -1,0 +1,114 @@
+{
+  "$id": "https://porta.dev/contracts/audit/audit-record.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "audit_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "contract_name": {
+      "const": "AuditRecord"
+    },
+    "correlation_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "created_at": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp"
+    },
+    "decision_trace": {
+      "additionalProperties": false,
+      "properties": {
+        "escalation_level": {
+          "maximum": 4,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "input_state_snapshot": {
+          "$ref": "../states/state-snapshot.schema.json"
+        },
+        "outcome": {
+          "enum": [
+            "issued",
+            "suppressed",
+            "skipped",
+            "failed"
+          ]
+        },
+        "policy_path": {
+          "items": {
+            "pattern": "^[a-zA-Z0-9_.-]{1,128}$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "input_state_snapshot",
+        "policy_path",
+        "escalation_level",
+        "outcome"
+      ],
+      "type": "object"
+    },
+    "evaluated_policy": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "event_chain": {
+      "items": {
+        "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+      },
+      "maxItems": 512,
+      "minItems": 1,
+      "type": "array"
+    },
+    "issued_intervention": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "machine_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "rbac_actor": {
+      "pattern": "^[a-z0-9_.@-]{3,128}$",
+      "type": "string"
+    },
+    "resulting_state": {
+      "enum": [
+        "stable",
+        "elevated_risk",
+        "degrading",
+        "critical",
+        "recovering"
+      ]
+    },
+    "retention_class": {
+      "enum": [
+        "short_term",
+        "regulatory",
+        "security",
+        "permanent"
+      ]
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "audit_id",
+    "machine_id",
+    "correlation_id",
+    "event_chain",
+    "evaluated_policy",
+    "resulting_state",
+    "issued_intervention",
+    "rbac_actor",
+    "decision_trace",
+    "created_at",
+    "retention_class"
+  ],
+  "title": "AuditRecord",
+  "type": "object"
+}

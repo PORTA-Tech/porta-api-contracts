@@ -1,0 +1,14 @@
+{
+  "contract_name": "ControlPlanePolicyEngineObservabilityMetric",
+  "schema_version": "1.0.0",
+  "metric_id": "11831f56-d96f-4c9f-8896-570f882dc7f2",
+  "metric_name": "policy_trigger_total",
+  "policy_id": "018f9b74-ff6a-7b10-baa1-6f4e77a2d901",
+  "window_start": "2026-02-22T15:00:00Z",
+  "window_end": "2026-02-22T16:00:00Z",
+  "value": 4,
+  "labels": {
+    "service": "payments-api",
+    "environment": "prod"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "vector_id": "session-expiry-too-long",
+  "input": {
+    "tls_enabled": true,
+    "jwt_present": true,
+    "session_expiry_seconds": 301
+  },
+  "expected": {
+    "valid": false,
+    "error_code": "SESSION_EXPIRED_POLICY_VIOLATION"
+  }
+}

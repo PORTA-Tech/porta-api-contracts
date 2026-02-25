@@ -7,7 +7,18 @@ on:
     branches: ["main"]
 
 jobs:
-  verify:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+
+  types:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,5 +28,74 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check
+
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
       - run: npm run test
-      - run: npm run build
+
+  contracts-validation:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: porta-contracts
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: porta-contracts/package-lock.json
+      - run: npm ci
+      - run: npm run contracts:validate
+
+  compatibility-check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: porta-contracts
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: porta-contracts/package-lock.json
+      - run: npm ci
+      - run: npm run contracts:compat
+
+  client-generation-check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: porta-contracts
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: porta-contracts/package-lock.json
+      - run: npm ci
+      - run: npm run contracts:client-check
+
+  schema-drift-check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: porta-contracts
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: porta-contracts/package-lock.json
+      - run: npm ci
+      - run: npm run contracts:drift

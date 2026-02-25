@@ -1,0 +1,92 @@
+{
+  "name": "canonicalization_variance",
+  "expected": {
+    "valid": true,
+    "canonical_sha256": "379e48b944d8d0aebfd96e76e71aee6dc360bf25aaba805b59e289cddc890c89"
+  },
+  "policy": {
+    "version": "2.0.0",
+    "created_by": "control-plane@porta",
+    "policy_id": "33333333-3333-4333-8333-333333333333",
+    "contract_name": "RegulationPolicy",
+    "schema_version": "2.0.0",
+    "target_states": [
+      "elevated_risk",
+      "degrading",
+      "critical"
+    ],
+    "policy_name": "stabilized-risk-policy-v2",
+    "severity_max": 4,
+    "severity_min": 2,
+    "conditions": {
+      "operator": "AND",
+      "conditions": [
+        {
+          "field": "probability",
+          "op": ">=",
+          "value": 0.8
+        },
+        {
+          "field": "confidence",
+          "op": ">=",
+          "value": 0.7
+        },
+        {
+          "operator": "OR",
+          "conditions": [
+            {
+              "field": "state_name",
+              "op": "==",
+              "value": "degrading"
+            },
+            {
+              "field": "state_name",
+              "op": "==",
+              "value": "critical"
+            }
+          ]
+        }
+      ]
+    },
+    "interventions": [
+      {
+        "intervention_type": "notify",
+        "parameters": {
+          "message_code": "RISK_ELEVATED"
+        },
+        "priority": 1,
+        "max_frequency": "PT1M",
+        "requires_human_confirmation": false
+      },
+      {
+        "intervention_type": "require_ack",
+        "parameters": {
+          "channel": "on_call"
+        },
+        "priority": 2,
+        "max_frequency": "PT5M",
+        "requires_human_confirmation": true
+      }
+    ],
+    "machine_selector": {
+      "type": "tags",
+      "tags": [
+        "prod",
+        "windows"
+      ]
+    },
+    "stability_overrides": {
+      "min_dwell_seconds": 40,
+      "min_cooldown_seconds": 90,
+      "min_sustained_probability": 0.85
+    },
+    "created_at": "2026-02-23T14:00:00Z",
+    "policy_model_version": "deterministic-policy-v1.0.0",
+    "signature": {
+      "algorithm": "Ed25519",
+      "signing_key_id": "kid-a13f09bc-v3",
+      "signature": "UwLYN6_FKrrxxjKydWWLD991kW0USHFAvbpZqrIX_SB-8ZVvNhrMdSIdZpTfs9zjRaCc7A1O3uF1kYqMTpTGBw",
+      "created_at": "2026-02-23T14:00:00Z"
+    }
+  }
+}

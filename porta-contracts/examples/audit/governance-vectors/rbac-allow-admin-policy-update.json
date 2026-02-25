@@ -1,0 +1,13 @@
+{
+  "vector_id": "rbac-allow-admin-policy-update",
+  "input": {
+    "subject_role": "admin",
+    "action": "policy_update",
+    "resource": "/api/v1/policies/018f9b74-ff6a-7b10-baa1-6f4e77a2d901"
+  },
+  "expected": {
+    "decision": "allow",
+    "required_role": "admin",
+    "error_code": null
+  }
+}

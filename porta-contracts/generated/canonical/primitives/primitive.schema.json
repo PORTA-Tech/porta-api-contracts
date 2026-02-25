@@ -1,0 +1,78 @@
+{
+  "$id": "https://porta.dev/contracts/primitives/primitive.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "baseline_mean": {
+      "type": "number"
+    },
+    "baseline_std": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "computed_at": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp"
+    },
+    "confidence": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/probability"
+    },
+    "contract_name": {
+      "const": "BehaviorPrimitive"
+    },
+    "ewma": {
+      "type": "number"
+    },
+    "machine_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "name": {
+      "enum": [
+        "motor_volatility_index",
+        "interaction_burst_intensity",
+        "focus_switch_rate",
+        "sustained_attention_duration",
+        "idle_fragmentation_index",
+        "notification_reactivity_index"
+      ]
+    },
+    "primitive_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "unit": {
+      "pattern": "^[a-zA-Z0-9_./%-]{1,24}$",
+      "type": "string"
+    },
+    "value": {
+      "type": "number"
+    },
+    "window_size": {
+      "maximum": 1000000,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "z_score": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "primitive_id",
+    "machine_id",
+    "name",
+    "value",
+    "unit",
+    "baseline_mean",
+    "baseline_std",
+    "z_score",
+    "ewma",
+    "window_size",
+    "confidence",
+    "computed_at"
+  ],
+  "title": "BehaviorPrimitive",
+  "type": "object"
+}

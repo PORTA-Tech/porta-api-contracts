@@ -1,0 +1,15 @@
+{
+  "contract_name": "ControlPlaneIngestionHealthMetric",
+  "schema_version": "1.0.0",
+  "metric_id": "30ad6f77-38d6-4d6c-8505-6c430f5b7168",
+  "metric_name": "producer_error_rate",
+  "producer_id": "edge-node-17",
+  "schema_name": "control.telemetry.metric",
+  "window_start": "2026-02-25T09:10:00Z",
+  "window_end": "2026-02-25T09:15:00Z",
+  "value": -0.2,
+  "unit": "percent",
+  "labels": {
+    "region": "us-east-1"
+  }
+}

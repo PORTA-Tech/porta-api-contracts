@@ -1,0 +1,43 @@
+{
+  "$id": "https://porta.dev/contracts/events/agent-primitive.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": {
+      "const": "AgentPrimitiveEvent"
+    },
+    "event_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "event_type": {
+      "const": "agent.primitive"
+    },
+    "ingestion_timestamp": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp"
+    },
+    "machine_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "payload": {
+      "$ref": "../primitives/primitive.schema.json"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "timestamp": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp"
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "event_id",
+    "machine_id",
+    "event_type",
+    "timestamp",
+    "ingestion_timestamp",
+    "payload"
+  ],
+  "title": "AgentPrimitiveEvent",
+  "type": "object"
+}

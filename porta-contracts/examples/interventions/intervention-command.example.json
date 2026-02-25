@@ -1,0 +1,17 @@
+{
+  "contract_name": "InterventionCommand",
+  "schema_version": "1.0.0",
+  "intervention_id": "44444444-4444-4444-8444-444444444444",
+  "machine_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+  "intervention_type": "reduce_load",
+  "policy_id": "33333333-3333-4333-8333-333333333333",
+  "state_id": "22222222-2222-4222-8222-222222222222",
+  "issued_at": "2026-02-23T15:00:10Z",
+  "expires_at": "2026-02-23T15:05:10Z",
+  "parameters": {
+    "notification_rate": "low",
+    "focus_mode": true
+  },
+  "signature": "MEYCIQDMOCK_INTERVENTION_SIGNATURE_1234567890abcdef==",
+  "correlation_id": "55555555-5555-4555-8555-555555555555"
+}

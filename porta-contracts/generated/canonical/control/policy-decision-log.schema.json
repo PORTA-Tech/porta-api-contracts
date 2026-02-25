@@ -1,0 +1,130 @@
+{
+  "$id": "https://porta.dev/contracts/control/policy-decision-log.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "condition_evaluation": {
+      "additionalProperties": false,
+      "properties": {
+        "actual_value": {
+          "type": "number"
+        },
+        "matched": {
+          "type": "boolean"
+        },
+        "operator": {
+          "enum": [
+            ">",
+            ">=",
+            "<",
+            "<=",
+            "==",
+            "!="
+          ]
+        },
+        "threshold": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "operator",
+        "threshold",
+        "actual_value",
+        "matched"
+      ],
+      "type": "object"
+    },
+    "contract_name": {
+      "const": "ControlPlanePolicyDecisionLog"
+    },
+    "decision_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "decision_result": {
+      "enum": [
+        "triggered",
+        "condition_not_met",
+        "cooldown_active",
+        "hourly_cap_reached",
+        "global_cap_reached",
+        "kill_switch_active",
+        "safety_cap_reached"
+      ]
+    },
+    "evaluated_at": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp"
+    },
+    "input_metrics": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "aggregation": {
+            "enum": [
+              "avg",
+              "p95",
+              "p99",
+              "max",
+              "min"
+            ]
+          },
+          "metric_name": {
+            "pattern": "^[a-z][a-z0-9_]{2,63}$",
+            "type": "string"
+          },
+          "schema_name": {
+            "maxLength": 128,
+            "minLength": 3,
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          },
+          "window_seconds": {
+            "maximum": 3600,
+            "minimum": 15,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "schema_name",
+          "metric_name",
+          "aggregation",
+          "window_seconds",
+          "value"
+        ],
+        "type": "object"
+      },
+      "maxItems": 32,
+      "type": "array"
+    },
+    "policy_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "policy_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "policy_order_index": {
+      "maximum": 1000000,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "decision_id",
+    "evaluated_at",
+    "policy_id",
+    "policy_hash",
+    "input_metrics",
+    "condition_evaluation",
+    "decision_result",
+    "policy_order_index"
+  ],
+  "title": "ControlPlanePolicyDecisionLog",
+  "type": "object"
+}

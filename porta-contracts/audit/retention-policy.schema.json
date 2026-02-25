@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://porta.dev/contracts/audit/retention-policy.schema.json",
+  "title": "AuditRetentionPolicy",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": { "const": "AuditRetentionPolicy" },
+    "schema_version": { "const": "1.0.0" },
+    "policy_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "created_at": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" },
+    "decision_trace_retention_days": { "const": 1095 },
+    "intervention_command_retention_days": { "const": 365 },
+    "metric_snapshot_hot_retention_days": { "const": 90 },
+    "metric_snapshot_cold_retention_days": { "const": 730 },
+    "policy_versions_retention": { "const": "indefinite" },
+    "storage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "database": { "const": "TimescaleDB" },
+        "table": { "const": "audit_decision_traces" },
+        "partition_granularity": { "const": "monthly" },
+        "append_only": { "const": true },
+        "immutable_backups": { "const": true },
+        "backup_snapshot_cron": { "const": "0 1 * * *" },
+        "backup_verify_cron": { "const": "0 3 * * 0" }
+      },
+      "required": [
+        "database",
+        "table",
+        "partition_granularity",
+        "append_only",
+        "immutable_backups",
+        "backup_snapshot_cron",
+        "backup_verify_cron"
+      ]
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "policy_id",
+    "created_at",
+    "decision_trace_retention_days",
+    "intervention_command_retention_days",
+    "metric_snapshot_hot_retention_days",
+    "metric_snapshot_cold_retention_days",
+    "policy_versions_retention",
+    "storage"
+  ]
+}

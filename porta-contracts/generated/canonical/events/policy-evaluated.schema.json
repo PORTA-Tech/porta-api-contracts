@@ -1,0 +1,74 @@
+{
+  "$id": "https://porta.dev/contracts/events/policy-evaluated.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": {
+      "const": "PolicyEvaluatedEvent"
+    },
+    "event_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "event_type": {
+      "const": "policy.evaluated"
+    },
+    "ingestion_timestamp": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp"
+    },
+    "machine_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "payload": {
+      "additionalProperties": false,
+      "properties": {
+        "match": {
+          "type": "boolean"
+        },
+        "policy_id": {
+          "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+        },
+        "policy_version": {
+          "$ref": "../shared/common-defs.schema.json#/$defs/semver"
+        },
+        "reason_codes": {
+          "items": {
+            "pattern": "^[a-z0-9_.-]{3,64}$",
+            "type": "string"
+          },
+          "maxItems": 16,
+          "minItems": 1,
+          "type": "array"
+        },
+        "state_id": {
+          "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+        }
+      },
+      "required": [
+        "policy_id",
+        "policy_version",
+        "state_id",
+        "match",
+        "reason_codes"
+      ],
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "timestamp": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp"
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "event_id",
+    "machine_id",
+    "event_type",
+    "timestamp",
+    "ingestion_timestamp",
+    "payload"
+  ],
+  "title": "PolicyEvaluatedEvent",
+  "type": "object"
+}

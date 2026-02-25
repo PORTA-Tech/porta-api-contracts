@@ -1,0 +1,13 @@
+{
+  "contract_name": "ControlPlanePolicyEngineState",
+  "schema_version": "1.0.0",
+  "state_key": "/state/prod/payments-api",
+  "environment": "prod",
+  "service": "payments-api",
+  "replicas": 8,
+  "last_scale_time": "2026-02-22T15:10:04Z",
+  "last_policy_trigger": "018f9b74-ff6a-7b10-baa1-6f4e77a2d901",
+  "trigger_count_last_hour": 3,
+  "version": -1,
+  "updated_at": "2026-02-22T15:10:04Z"
+}

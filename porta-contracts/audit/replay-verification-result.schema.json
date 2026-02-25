@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://porta.dev/contracts/audit/replay-verification-result.schema.json",
+  "title": "AuditReplayVerificationResult",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": { "const": "AuditReplayVerificationResult" },
+    "schema_version": { "const": "1.0.0" },
+    "verification_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "trace_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "verified_at": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" },
+    "result": { "enum": ["match", "mismatch"] },
+    "differences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "field_name": { "type": "string", "minLength": 1, "maxLength": 128 },
+          "expected_value": {
+            "anyOf": [
+              { "type": "string" },
+              { "type": "number" },
+              { "type": "integer" },
+              { "type": "boolean" },
+              { "type": "null" }
+            ]
+          },
+          "actual_value": {
+            "anyOf": [
+              { "type": "string" },
+              { "type": "number" },
+              { "type": "integer" },
+              { "type": "boolean" },
+              { "type": "null" }
+            ]
+          }
+        },
+        "required": ["field_name", "expected_value", "actual_value"]
+      },
+      "maxItems": 128
+    },
+    "signature_verification": { "enum": ["verified", "invalid"] }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "verification_id",
+    "trace_id",
+    "verified_at",
+    "result",
+    "differences",
+    "signature_verification"
+  ]
+}

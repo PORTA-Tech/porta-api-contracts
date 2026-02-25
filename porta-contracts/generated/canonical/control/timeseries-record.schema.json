@@ -1,0 +1,88 @@
+{
+  "$id": "https://porta.dev/contracts/control/timeseries-record.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": {
+      "const": "ControlPlaneTimeSeriesRecord"
+    },
+    "immutability_mode": {
+      "enum": [
+        "mutable",
+        "append_only",
+        "worm"
+      ]
+    },
+    "ingestion_time": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp"
+    },
+    "payload": {
+      "minProperties": 1,
+      "type": "object"
+    },
+    "payload_canonical": {
+      "maxLength": 131072,
+      "minLength": 2,
+      "type": "string"
+    },
+    "producer_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$",
+      "type": "string"
+    },
+    "record_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "schema_name": {
+      "maxLength": 128,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "signature_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "signature_verification_result": {
+      "enum": [
+        "verified",
+        "not_required",
+        "invalid_signature",
+        "unknown_key",
+        "revoked_key"
+      ]
+    },
+    "timestamp": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp"
+    },
+    "validated_schema_version": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/semver"
+    },
+    "validation_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "record_id",
+    "schema_name",
+    "validated_schema_version",
+    "producer_id",
+    "timestamp",
+    "ingestion_time",
+    "payload",
+    "payload_canonical",
+    "validation_hash",
+    "signature_verification_result",
+    "immutability_mode"
+  ],
+  "title": "ControlPlaneTimeSeriesRecord",
+  "type": "object"
+}

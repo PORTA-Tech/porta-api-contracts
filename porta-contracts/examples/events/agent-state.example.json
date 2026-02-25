@@ -1,0 +1,25 @@
+{
+  "contract_name": "AgentStateEvent",
+  "schema_version": "1.0.0",
+  "event_id": "99999999-9999-4999-8999-999999999999",
+  "machine_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+  "event_type": "agent.state",
+  "timestamp": "2026-02-23T15:00:05Z",
+  "ingestion_timestamp": "2026-02-23T15:00:06Z",
+  "payload": {
+    "contract_name": "StateSnapshot",
+    "schema_version": "1.0.0",
+    "state_id": "22222222-2222-4222-8222-222222222222",
+    "machine_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+    "state_name": "elevated_risk",
+    "probability": 0.81,
+    "confidence": 0.72,
+    "contributing_primitives": [
+      { "name": "focus_switch_rate", "weight": 0.55, "deviation": 2.1 }
+    ],
+    "explanation": "Elevated overload likelihood from sustained switching.",
+    "baseline_deviation_factor": 1.93,
+    "evaluated_at": "2026-02-23T15:00:05Z",
+    "model_version": "deterministic-v1"
+  }
+}

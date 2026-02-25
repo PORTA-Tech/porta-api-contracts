@@ -1,0 +1,40 @@
+{
+  "vector_id": "reject-payload-too-large",
+  "ingestion_time": "2026-02-25T10:06:08Z",
+  "signature_verification_result": "not_required",
+  "registry": {
+    "schema_name": "control.telemetry.metric",
+    "registered_schema_version": "1.2.3",
+    "compatibility_mode": "exact_major_backward_minor_patch",
+    "deprecation_state": "active",
+    "allowed_producers": [
+      "edge-node-17"
+    ],
+    "required_signature": false,
+    "required_mtls": true,
+    "minimum_supported_minor": 1,
+    "maximum_supported_minor": 4,
+    "allow_patch": true,
+    "max_payload_bytes": 80,
+    "max_clock_skew_seconds": 120
+  },
+  "envelope": {
+    "schema_name": "control.telemetry.metric",
+    "declared_schema_version": "1.2.0",
+    "producer_id": "edge-node-17",
+    "timestamp": "2026-02-25T10:06:00Z",
+    "payload": {
+      "metric_name": "cpu_utilization",
+      "window": "1234567890123456789012345678901234567890123456789012345678901234567890",
+      "value": 0.74,
+      "unit": "ratio"
+    },
+    "signature": null
+  },
+  "expected": {
+    "decision": "reject",
+    "error_code": "PAYLOAD_TOO_LARGE",
+    "compatibility_result": "compatible",
+    "verification_result": "not_required"
+  }
+}

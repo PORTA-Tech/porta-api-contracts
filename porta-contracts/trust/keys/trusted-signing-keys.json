@@ -1,0 +1,19 @@
+{
+  "version": "1.0.0",
+  "keys": [
+    {
+      "key_id": "kid-a13f09bc-v3",
+      "algorithm": "Ed25519",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEANofOZi35rYrDpIiYf/IbEba4Zn+0SdpoCCPkb/PASsI=\n-----END PUBLIC KEY-----\n",
+      "created_at": "2026-02-23T14:00:00Z",
+      "status": "active"
+    },
+    {
+      "key_id": "kid-deadbeef-v1",
+      "algorithm": "Ed25519",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAUwEDtlsXunc7a87RyVNU4fYPJfCECK+UFx4d8Sdu8J4=\n-----END PUBLIC KEY-----\n",
+      "created_at": "2026-02-10T00:00:00Z",
+      "status": "revoked"
+    }
+  ]
+}

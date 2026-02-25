@@ -1,0 +1,138 @@
+{
+  "$id": "https://porta.dev/contracts/audit/decision-trace.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action_decision": {
+      "enum": [
+        "intervene",
+        "skip",
+        "cooldown",
+        "blocked"
+      ]
+    },
+    "action_parameters": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "boolean"
+          }
+        ]
+      },
+      "maxProperties": 64,
+      "type": "object"
+    },
+    "condition_result": {
+      "type": "boolean"
+    },
+    "confidence_score": {
+      "maximum": 1,
+      "minimum": 0,
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "contract_name": {
+      "const": "AuditDecisionTrace"
+    },
+    "metrics_snapshot": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "boolean"
+          }
+        ]
+      },
+      "maxProperties": 128,
+      "minProperties": 1,
+      "type": "object"
+    },
+    "policy_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "signature": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "const": "Ed25519"
+        },
+        "key_id": {
+          "const": "cp-root-key-01"
+        },
+        "signature": {
+          "pattern": "^[A-Za-z0-9+/=]{80,128}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "algorithm",
+        "key_id",
+        "signature"
+      ],
+      "type": "object"
+    },
+    "state_version": {
+      "maximum": 2147483647,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "target_service": {
+      "maxLength": 128,
+      "minLength": 2,
+      "type": "string"
+    },
+    "timestamp": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp"
+    },
+    "trace_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "trace_schema_version": {
+      "const": "audit.decision.v1.0.0"
+    },
+    "triggered_by": {
+      "pattern": "^[a-z0-9_.-]{3,64}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "trace_schema_version",
+    "trace_id",
+    "timestamp",
+    "policy_id",
+    "state_version",
+    "target_service",
+    "metrics_snapshot",
+    "condition_result",
+    "action_decision",
+    "action_parameters",
+    "triggered_by",
+    "signature"
+  ],
+  "title": "AuditDecisionTrace",
+  "type": "object"
+}

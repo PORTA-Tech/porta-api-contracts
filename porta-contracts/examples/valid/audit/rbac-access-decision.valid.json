@@ -1,0 +1,13 @@
+{
+  "contract_name": "AuditRbacAccessDecision",
+  "schema_version": "1.0.0",
+  "decision_id": "c57032f6-f18e-4486-a05f-19b573d4ec72",
+  "timestamp": "2026-02-22T15:20:00Z",
+  "subject_id": "jane.ops@porta",
+  "subject_role": "operator",
+  "required_role": "operator",
+  "resource": "/api/v1/audit/traces",
+  "operation": "read",
+  "decision": "allow",
+  "error": null
+}

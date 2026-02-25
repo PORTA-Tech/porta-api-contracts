@@ -1,0 +1,16 @@
+{
+    "contract_name":  "InterventionFailedEvent",
+    "schema_version":  "0.0.0",
+    "event_id":  "dddd1111-1111-4111-8111-111111111111",
+    "machine_id":  "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+    "event_type":  "intervention.failed",
+    "timestamp":  "2026-02-23T15:00:11Z",
+    "ingestion_timestamp":  "2026-02-23T15:00:12Z",
+    "payload":  {
+                    "intervention_id":  "44444444-4444-4444-8444-444444444444",
+                    "policy_id":  "33333333-3333-4333-8333-333333333333",
+                    "error_code":  "WINDOWS_API_FAILURE",
+                    "error_class":  "execution",
+                    "failed_at":  "2026-02-23T15:00:11Z"
+                }
+}

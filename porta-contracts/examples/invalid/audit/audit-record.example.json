@@ -1,0 +1,46 @@
+{
+    "contract_name":  "AuditRecord",
+    "schema_version":  "0.0.0",
+    "audit_id":  "66666666-6666-4666-8666-666666666666",
+    "machine_id":  "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+    "correlation_id":  "55555555-5555-4555-8555-555555555555",
+    "event_chain":  [
+                        "77777777-7777-4777-8777-777777777777",
+                        "88888888-8888-4888-8888-888888888888"
+                    ],
+    "evaluated_policy":  "33333333-3333-4333-8333-333333333333",
+    "resulting_state":  "elevated_risk",
+    "issued_intervention":  "44444444-4444-4444-8444-444444444444",
+    "rbac_actor":  "admin@porta.local",
+    "decision_trace":  {
+                           "input_state_snapshot":  {
+                                                        "contract_name":  "StateSnapshot",
+                                                        "schema_version":  "1.0.0",
+                                                        "state_id":  "22222222-2222-4222-8222-222222222222",
+                                                        "machine_id":  "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+                                                        "state_name":  "elevated_risk",
+                                                        "probability":  0.81,
+                                                        "confidence":  0.72,
+                                                        "contributing_primitives":  [
+                                                                                        {
+                                                                                            "name":  "focus_switch_rate",
+                                                                                            "weight":  0.55,
+                                                                                            "deviation":  2.1
+                                                                                        }
+                                                                                    ],
+                                                        "explanation":  "Elevated overload likelihood.",
+                                                        "baseline_deviation_factor":  1.93,
+                                                        "evaluated_at":  "2026-02-23T15:00:05Z",
+                                                        "model_version":  "deterministic-v1"
+                                                    },
+                           "policy_path":  [
+                                               "threshold_check",
+                                               "hysteresis_check",
+                                               "emit_command"
+                                           ],
+                           "escalation_level":  2,
+                           "outcome":  "issued"
+                       },
+    "created_at":  "2026-02-23T15:00:11Z",
+    "retention_class":  "security"
+}

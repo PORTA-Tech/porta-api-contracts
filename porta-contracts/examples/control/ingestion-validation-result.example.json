@@ -1,0 +1,13 @@
+{
+  "contract_name": "ControlPlaneIngestionValidationResult",
+  "schema_version": "1.0.0",
+  "result_id": "0db7f4d3-1fd8-4fb3-b6ec-f4af36624e25",
+  "schema_name": "control.telemetry.metric",
+  "declared_schema_version": "1.2.0",
+  "producer_id": "edge-node-17",
+  "validated_at": "2026-02-25T09:11:00Z",
+  "decision": "accept",
+  "error_code": null,
+  "verification_result": "verified",
+  "compatibility_result": "compatible"
+}

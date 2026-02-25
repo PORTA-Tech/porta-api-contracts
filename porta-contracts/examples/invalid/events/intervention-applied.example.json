@@ -1,0 +1,17 @@
+{
+    "contract_name":  "InterventionAppliedEvent",
+    "schema_version":  "0.0.0",
+    "event_id":  "cccc1111-1111-4111-8111-111111111111",
+    "machine_id":  "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+    "event_type":  "intervention.applied",
+    "timestamp":  "2026-02-23T15:00:11Z",
+    "ingestion_timestamp":  "2026-02-23T15:00:12Z",
+    "payload":  {
+                    "intervention_id":  "44444444-4444-4444-8444-444444444444",
+                    "policy_id":  "33333333-3333-4333-8333-333333333333",
+                    "state_id":  "22222222-2222-4222-8222-222222222222",
+                    "applied_at":  "2026-02-23T15:00:11Z",
+                    "duration_ms":  120000,
+                    "outcome":  "success"
+                }
+}

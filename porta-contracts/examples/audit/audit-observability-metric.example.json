@@ -1,0 +1,13 @@
+{
+  "contract_name": "AuditObservabilityMetric",
+  "schema_version": "1.0.0",
+  "metric_id": "8a6472c1-1f69-4338-ad1d-6cd68b2f37ad",
+  "metric_name": "audit_access_denied_total",
+  "window_start": "2026-02-22T15:00:00Z",
+  "window_end": "2026-02-22T16:00:00Z",
+  "value": 12,
+  "labels": {
+    "component": "cp-policy-engine",
+    "environment": "prod"
+  }
+}

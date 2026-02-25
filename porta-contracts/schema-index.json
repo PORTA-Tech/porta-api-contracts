@@ -1,0 +1,32 @@
+{
+  "entries": [
+    { "schema": "audit/decision-trace.schema.json", "example": "examples/audit/decision-trace.example.json" },
+    { "schema": "audit/rbac-access-decision.schema.json", "example": "examples/audit/rbac-access-decision.example.json" },
+    { "schema": "audit/retention-policy.schema.json", "example": "examples/audit/retention-policy.example.json" },
+    { "schema": "audit/replay-verification-result.schema.json", "example": "examples/audit/replay-verification-result.example.json" },
+    { "schema": "audit/audit-observability-metric.schema.json", "example": "examples/audit/audit-observability-metric.example.json" },
+    { "schema": "control/typed-ingestion-envelope.schema.json", "example": "examples/control/typed-ingestion-envelope.example.json" },
+    { "schema": "control/schema-registry-entry.schema.json", "example": "examples/control/schema-registry-entry.example.json" },
+    { "schema": "control/ingestion-validation-result.schema.json", "example": "examples/control/ingestion-validation-result.example.json" },
+    { "schema": "control/timeseries-record.schema.json", "example": "examples/control/timeseries-record.example.json" },
+    { "schema": "control/ingestion-health-metric.schema.json", "example": "examples/control/ingestion-health-metric.example.json" },
+    { "schema": "control/policy-execution-policy.schema.json", "example": "examples/control/policy-execution-policy.example.json" },
+    { "schema": "control/policy-engine-state.schema.json", "example": "examples/control/policy-engine-state.example.json" },
+    { "schema": "control/signed-intervention-command.schema.json", "example": "examples/control/signed-intervention-command.example.json" },
+    { "schema": "control/policy-decision-log.schema.json", "example": "examples/control/policy-decision-log.example.json" },
+    { "schema": "control/policy-engine-observability.schema.json", "example": "examples/control/policy-engine-observability.example.json" },
+    { "schema": "events/signal-sample.schema.json", "example": "examples/events/signal-sample.example.json" },
+    { "schema": "events/agent-primitive.schema.json", "example": "examples/events/agent-primitive.example.json" },
+    { "schema": "events/agent-state.schema.json", "example": "examples/events/agent-state.example.json" },
+    { "schema": "events/policy-evaluated.schema.json", "example": "examples/events/policy-evaluated.example.json" },
+    { "schema": "events/intervention-issued.schema.json", "example": "examples/events/intervention-issued.example.json" },
+    { "schema": "events/intervention-applied.schema.json", "example": "examples/events/intervention-applied.example.json" },
+    { "schema": "events/intervention-failed.schema.json", "example": "examples/events/intervention-failed.example.json" },
+    { "schema": "events/agent-error.schema.json", "example": "examples/events/agent-error.example.json" },
+    { "schema": "primitives/primitive.schema.json", "example": "examples/primitives/primitive.example.json" },
+    { "schema": "states/state-snapshot.schema.json", "example": "examples/states/state-snapshot.example.json" },
+    { "schema": "policies/policy.schema.json", "example": "examples/policies/policy.example.json" },
+    { "schema": "interventions/intervention-command.schema.json", "example": "examples/interventions/intervention-command.example.json" },
+    { "schema": "audit/audit-record.schema.json", "example": "examples/audit/audit-record.example.json" }
+  ]
+}

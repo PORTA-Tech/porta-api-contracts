@@ -1,0 +1,10 @@
+{
+  "target": "intervention",
+  "algorithm": "ed25519",
+  "key_id": "intervention-key-1",
+  "payload": {
+    "schema_version": "1.0.0",
+    "issued_at": "2026-02-23T00:00:00Z"
+  },
+  "signature_base64": "QmFzZTY0U2lnbmF0dXJl"
+}

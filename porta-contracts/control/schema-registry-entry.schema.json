@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://porta.dev/contracts/control/schema-registry-entry.schema.json",
+  "title": "ControlPlaneSchemaRegistryEntry",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": { "const": "ControlPlaneSchemaRegistryEntry" },
+    "schema_version": { "const": "1.0.0" },
+    "schema_name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 128
+    },
+    "registered_schema_version": { "$ref": "../shared/common-defs.schema.json#/$defs/semver" },
+    "compatibility_mode": {
+      "enum": [
+        "exact_major_backward_minor_patch",
+        "strict_exact",
+        "full"
+      ]
+    },
+    "deprecation_state": { "enum": ["active", "deprecated", "blocked"] },
+    "allowed_producers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "required_signature": { "type": "boolean" },
+    "required_mtls": { "type": "boolean" },
+    "minimum_supported_minor": { "type": "integer", "minimum": 0, "maximum": 9999 },
+    "maximum_supported_minor": { "type": "integer", "minimum": 0, "maximum": 9999 },
+    "allow_patch": { "type": "boolean" },
+    "max_payload_bytes": { "type": "integer", "minimum": 1024, "maximum": 10485760 },
+    "max_clock_skew_seconds": { "type": "integer", "minimum": 0, "maximum": 86400 },
+    "updated_at": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "schema_name",
+    "registered_schema_version",
+    "compatibility_mode",
+    "deprecation_state",
+    "allowed_producers",
+    "required_signature",
+    "required_mtls",
+    "minimum_supported_minor",
+    "maximum_supported_minor",
+    "allow_patch",
+    "max_payload_bytes",
+    "max_clock_skew_seconds",
+    "updated_at"
+  ]
+}

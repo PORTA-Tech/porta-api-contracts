@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://porta.dev/contracts/states/state-snapshot.schema.json",
+  "title": "StateSnapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": { "const": "StateSnapshot" },
+    "schema_version": { "const": "1.0.0" },
+    "state_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "machine_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "state_name": { "enum": ["stable", "elevated_risk", "degrading", "critical", "recovering"] },
+    "probability": { "$ref": "../shared/common-defs.schema.json#/$defs/probability" },
+    "confidence": { "$ref": "../shared/common-defs.schema.json#/$defs/probability" },
+    "contributing_primitives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string", "pattern": "^[a-z][a-z0-9_]{2,63}$" },
+          "weight": { "type": "number", "minimum": 0, "maximum": 1 },
+          "deviation": { "type": "number" }
+        },
+        "required": ["name", "weight", "deviation"]
+      },
+      "minItems": 1,
+      "maxItems": 16
+    },
+    "explanation": { "type": "string", "minLength": 1, "maxLength": 512 },
+    "baseline_deviation_factor": { "type": "number", "minimum": 0 },
+    "evaluated_at": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" },
+    "model_version": { "type": "string", "pattern": "^[A-Za-z0-9_.-]{1,64}$" }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "state_id",
+    "machine_id",
+    "state_name",
+    "probability",
+    "confidence",
+    "contributing_primitives",
+    "explanation",
+    "baseline_deviation_factor",
+    "evaluated_at",
+    "model_version"
+  ]
+}

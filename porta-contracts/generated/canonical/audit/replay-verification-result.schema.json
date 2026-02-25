@@ -1,0 +1,104 @@
+{
+  "$id": "https://porta.dev/contracts/audit/replay-verification-result.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": {
+      "const": "AuditReplayVerificationResult"
+    },
+    "differences": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "actual_value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "expected_value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "field_name": {
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "field_name",
+          "expected_value",
+          "actual_value"
+        ],
+        "type": "object"
+      },
+      "maxItems": 128,
+      "type": "array"
+    },
+    "result": {
+      "enum": [
+        "match",
+        "mismatch"
+      ]
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "signature_verification": {
+      "enum": [
+        "verified",
+        "invalid"
+      ]
+    },
+    "trace_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "verification_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "verified_at": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp"
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "verification_id",
+    "trace_id",
+    "verified_at",
+    "result",
+    "differences",
+    "signature_verification"
+  ],
+  "title": "AuditReplayVerificationResult",
+  "type": "object"
+}

@@ -1,0 +1,77 @@
+{
+  "$id": "https://porta.dev/contracts/control/typed-ingestion-envelope.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "canonicalization": {
+      "const": "JCS-RFC8785"
+    },
+    "contract_name": {
+      "const": "ControlPlaneTypedIngestionEnvelope"
+    },
+    "declared_schema_version": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/semver"
+    },
+    "ingestion_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "payload": {
+      "minProperties": 1,
+      "type": "object"
+    },
+    "producer_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$",
+      "type": "string"
+    },
+    "schema_name": {
+      "maxLength": 128,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "signature": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "const": "Ed25519"
+        },
+        "signature": {
+          "pattern": "^[A-Za-z0-9_-]{86,128}$",
+          "type": "string"
+        },
+        "signing_key_id": {
+          "pattern": "^kid-[A-Za-z0-9-]{4,64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "algorithm",
+        "signing_key_id",
+        "signature"
+      ],
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "timestamp": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp"
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "ingestion_id",
+    "schema_name",
+    "declared_schema_version",
+    "producer_id",
+    "timestamp",
+    "payload",
+    "canonicalization"
+  ],
+  "title": "ControlPlaneTypedIngestionEnvelope",
+  "type": "object"
+}

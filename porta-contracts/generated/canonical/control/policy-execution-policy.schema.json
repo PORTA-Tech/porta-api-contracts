@@ -1,0 +1,235 @@
+{
+  "$id": "https://porta.dev/contracts/control/policy-execution-policy.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "max_replicas": {
+              "maximum": 200,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "min_replicas": {
+              "maximum": 200,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "scale_step": {
+              "maximum": 20,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "type": {
+              "const": "scale_horizontal"
+            }
+          },
+          "required": [
+            "type",
+            "min_replicas",
+            "max_replicas",
+            "scale_step"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "max_parallel": {
+              "maximum": 20,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "type": {
+              "const": "restart_pods"
+            }
+          },
+          "required": [
+            "type",
+            "max_parallel"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "shift_percentage": {
+              "maximum": 50,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "target_cluster": {
+              "maxLength": 128,
+              "minLength": 3,
+              "type": "string"
+            },
+            "type": {
+              "const": "traffic_shift"
+            }
+          },
+          "required": [
+            "type",
+            "shift_percentage",
+            "target_cluster"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "condition": {
+      "additionalProperties": false,
+      "properties": {
+        "operator": {
+          "enum": [
+            ">",
+            ">=",
+            "<",
+            "<=",
+            "==",
+            "!="
+          ]
+        },
+        "threshold": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "operator",
+        "threshold"
+      ],
+      "type": "object"
+    },
+    "contract_name": {
+      "const": "ControlPlaneExecutionPolicy"
+    },
+    "cool_down_seconds": {
+      "maximum": 86400,
+      "minimum": 15,
+      "type": "integer"
+    },
+    "created_at": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "max_triggers_per_hour": {
+      "maximum": 3600,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "policy_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "priority": {
+      "maximum": 1000,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "resource_scope": {
+      "additionalProperties": false,
+      "properties": {
+        "environment": {
+          "maxLength": 64,
+          "minLength": 2,
+          "type": "string"
+        },
+        "region": {
+          "maxLength": 64,
+          "minLength": 2,
+          "type": "string"
+        },
+        "service": {
+          "maxLength": 128,
+          "minLength": 2,
+          "type": "string"
+        }
+      },
+      "required": [
+        "service",
+        "environment"
+      ],
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "signature": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "const": "Ed25519"
+        },
+        "key_id": {
+          "const": "cp-root-key-01"
+        },
+        "signature": {
+          "pattern": "^[A-Za-z0-9+/=]{80,128}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "algorithm",
+        "key_id",
+        "signature"
+      ],
+      "type": "object"
+    },
+    "trigger": {
+      "additionalProperties": false,
+      "properties": {
+        "aggregation": {
+          "enum": [
+            "avg",
+            "p95",
+            "p99",
+            "max",
+            "min"
+          ]
+        },
+        "metric_name": {
+          "pattern": "^[a-z][a-z0-9_]{2,63}$",
+          "type": "string"
+        },
+        "schema_name": {
+          "maxLength": 128,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$",
+          "type": "string"
+        },
+        "window_seconds": {
+          "maximum": 3600,
+          "minimum": 15,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "schema_name",
+        "metric_name",
+        "aggregation",
+        "window_seconds"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "policy_id",
+    "enabled",
+    "priority",
+    "resource_scope",
+    "trigger",
+    "condition",
+    "action",
+    "cool_down_seconds",
+    "max_triggers_per_hour",
+    "created_at",
+    "signature"
+  ],
+  "title": "ControlPlaneExecutionPolicy",
+  "type": "object"
+}

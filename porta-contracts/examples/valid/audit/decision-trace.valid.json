@@ -1,0 +1,26 @@
+{
+  "contract_name": "AuditDecisionTrace",
+  "schema_version": "1.0.0",
+  "trace_schema_version": "audit.decision.v1.0.0",
+  "trace_id": "3f8b94de-0a80-4f6f-9f7d-ef8fd3efcf54",
+  "timestamp": "2026-02-22T15:15:01Z",
+  "policy_id": "018f9b74-ff6a-7b10-baa1-6f4e77a2d901",
+  "state_version": 42,
+  "target_service": "payments-api",
+  "metrics_snapshot": {
+    "cpu_usage_percent": 87.4,
+    "p95_window": 60
+  },
+  "condition_result": true,
+  "action_decision": "intervene",
+  "action_parameters": {
+    "desired_replicas": 10
+  },
+  "confidence_score": 0.81,
+  "triggered_by": "policy-engine-v1",
+  "signature": {
+    "algorithm": "Ed25519",
+    "key_id": "cp-root-key-01",
+    "signature": "MDEyMzQ1Njc4OWFiY2RlZjAxMjM0NTY3ODlhYmNkZWYwMTIzNDU2Nzg5YWJjZGVmMDEyMzQ1Njc4OWFiY2RlZg=="
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "$defs": {
+    "contractName": {
+      "pattern": "^[A-Za-z][A-Za-z0-9_.-]{2,63}$",
+      "type": "string"
+    },
+    "isoTimestamp": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "nonEmptyString": {
+      "maxLength": 512,
+      "minLength": 1,
+      "type": "string"
+    },
+    "probability": {
+      "maximum": 1,
+      "minimum": 0,
+      "type": "number"
+    },
+    "semver": {
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$",
+      "type": "string"
+    },
+    "uuid": {
+      "format": "uuid",
+      "type": "string"
+    }
+  },
+  "$id": "https://porta.dev/contracts/shared/common-defs.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CommonDefs",
+  "type": "object"
+}

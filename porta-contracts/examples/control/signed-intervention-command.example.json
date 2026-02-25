@@ -1,0 +1,22 @@
+{
+  "contract_name": "ControlPlaneSignedInterventionCommand",
+  "schema_version": "1.0.0",
+  "command_schema_version": "intervention.command.v1.0.0",
+  "command_id": "018f9b81-5b22-7a45-bfa3-0a11819a9933",
+  "policy_id": "018f9b74-ff6a-7b10-baa1-6f4e77a2d901",
+  "target_service": "payments-api",
+  "action": "scale_horizontal",
+  "parameters": {
+    "desired_replicas": 10,
+    "reason": "cpu_p95_above_85_percent"
+  },
+  "issued_at": "2026-02-22T15:12:30Z",
+  "expires_at": "2026-02-22T15:17:30Z",
+  "state_version": 42,
+  "signature_input_hash": "2f37fc2c57f95166ccb973dc65837f626be5ad19896fab3b46f6ac5762fd8e13",
+  "signature": {
+    "algorithm": "Ed25519",
+    "key_id": "cp-root-key-01",
+    "signature": "MDEyMzQ1Njc4OWFiY2RlZjAxMjM0NTY3ODlhYmNkZWYwMTIzNDU2Nzg5YWJjZGVmMDEyMzQ1Njc4OWFiY2RlZg=="
+  }
+}

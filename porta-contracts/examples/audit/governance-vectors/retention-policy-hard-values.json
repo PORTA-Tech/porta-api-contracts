@@ -1,0 +1,13 @@
+{
+  "vector_id": "retention-policy-hard-values",
+  "input": {
+    "decision_trace_retention_days": 1095,
+    "intervention_command_retention_days": 365,
+    "metric_snapshot_hot_retention_days": 90,
+    "metric_snapshot_cold_retention_days": 730,
+    "policy_versions_retention": "indefinite"
+  },
+  "expected": {
+    "valid": true
+  }
+}

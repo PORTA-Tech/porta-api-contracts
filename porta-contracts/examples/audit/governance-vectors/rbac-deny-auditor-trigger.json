@@ -1,0 +1,13 @@
+{
+  "vector_id": "rbac-deny-auditor-trigger",
+  "input": {
+    "subject_role": "auditor",
+    "action": "manual_intervention_trigger",
+    "resource": "/api/v1/interventions/manual-trigger"
+  },
+  "expected": {
+    "decision": "deny",
+    "required_role": "operator",
+    "error_code": "RBAC_DENIED"
+  }
+}

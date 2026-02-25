@@ -1,0 +1,108 @@
+{
+  "schema": "policy.control.v1.0.0",
+  "policies": [
+    {
+      "contract_name": "ControlPlaneExecutionPolicy",
+      "schema_version": "1.0.0",
+      "policy_id": "018f9b74-ff6a-7b10-baa1-6f4e77a2d901",
+      "enabled": true,
+      "priority": 100,
+      "resource_scope": {
+        "service": "payments-api",
+        "environment": "prod",
+        "region": "us-east-1"
+      },
+      "trigger": {
+        "schema_name": "control.telemetry.metric",
+        "metric_name": "cpu_usage_percent",
+        "aggregation": "p95",
+        "window_seconds": 60
+      },
+      "condition": {
+        "operator": ">",
+        "threshold": 85.0
+      },
+      "action": {
+        "type": "scale_horizontal",
+        "min_replicas": 6,
+        "max_replicas": 20,
+        "scale_step": 2
+      },
+      "cool_down_seconds": 300,
+      "max_triggers_per_hour": 6,
+      "created_at": "2026-02-22T15:00:00Z",
+      "signature": {
+        "algorithm": "Ed25519",
+        "key_id": "cp-root-key-01",
+        "signature": "MDEyMzQ1Njc4OWFiY2RlZjAxMjM0NTY3ODlhYmNkZWYwMTIzNDU2Nzg5YWJjZGVmMDEyMzQ1Njc4OWFiY2RlZg=="
+      }
+    },
+    {
+      "contract_name": "ControlPlaneExecutionPolicy",
+      "schema_version": "1.0.0",
+      "policy_id": "018f9b75-43c2-7e30-91fa-924ae9ab4c33",
+      "enabled": true,
+      "priority": 200,
+      "resource_scope": {
+        "service": "payments-api",
+        "environment": "prod"
+      },
+      "trigger": {
+        "schema_name": "control.telemetry.metric",
+        "metric_name": "memory_usage_percent",
+        "aggregation": "avg",
+        "window_seconds": 300
+      },
+      "condition": {
+        "operator": ">",
+        "threshold": 92.0
+      },
+      "action": {
+        "type": "restart_pods",
+        "max_parallel": 1
+      },
+      "cool_down_seconds": 900,
+      "max_triggers_per_hour": 2,
+      "created_at": "2026-02-22T15:00:00Z",
+      "signature": {
+        "algorithm": "Ed25519",
+        "key_id": "cp-root-key-01",
+        "signature": "MDEyMzQ1Njc4OWFiY2RlZjAxMjM0NTY3ODlhYmNkZWYwMTIzNDU2Nzg5YWJjZGVmMDEyMzQ1Njc4OWFiY2RlZg=="
+      }
+    },
+    {
+      "contract_name": "ControlPlaneExecutionPolicy",
+      "schema_version": "1.0.0",
+      "policy_id": "018f9b76-a2de-7023-bbb3-6a51a911e2d0",
+      "enabled": true,
+      "priority": 50,
+      "resource_scope": {
+        "service": "checkout-api",
+        "environment": "prod"
+      },
+      "trigger": {
+        "schema_name": "control.telemetry.metric",
+        "metric_name": "http_latency_ms",
+        "aggregation": "p99",
+        "window_seconds": 120
+      },
+      "condition": {
+        "operator": ">",
+        "threshold": 750
+      },
+      "action": {
+        "type": "traffic_shift",
+        "shift_percentage": 20,
+        "target_cluster": "checkout-api-prod-green"
+      },
+      "cool_down_seconds": 600,
+      "max_triggers_per_hour": 4,
+      "created_at": "2026-02-22T15:00:00Z",
+      "signature": {
+        "algorithm": "Ed25519",
+        "key_id": "cp-root-key-01",
+        "signature": "MDEyMzQ1Njc4OWFiY2RlZjAxMjM0NTY3ODlhYmNkZWYwMTIzNDU2Nzg5YWJjZGVmMDEyMzQ1Njc4OWFiY2RlZg=="
+      }
+    }
+  ]
+}

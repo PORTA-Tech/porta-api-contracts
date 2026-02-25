@@ -1,0 +1,54 @@
+{
+  "$id": "https://porta.dev/contracts/audit/audit-observability-metric.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": {
+      "const": "AuditObservabilityMetric"
+    },
+    "labels": {
+      "additionalProperties": {
+        "maxLength": 128,
+        "type": "string"
+      },
+      "type": "object"
+    },
+    "metric_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "metric_name": {
+      "enum": [
+        "audit_traces_written_total",
+        "audit_traces_failed_total",
+        "audit_access_denied_total",
+        "audit_replay_mismatch_total",
+        "audit_signature_verification_total"
+      ]
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "value": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "window_end": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp"
+    },
+    "window_start": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp"
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "metric_id",
+    "metric_name",
+    "window_start",
+    "window_end",
+    "value",
+    "labels"
+  ],
+  "title": "AuditObservabilityMetric",
+  "type": "object"
+}

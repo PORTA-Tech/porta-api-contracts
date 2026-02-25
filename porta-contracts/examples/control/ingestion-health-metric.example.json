@@ -1,0 +1,16 @@
+{
+  "contract_name": "ControlPlaneIngestionHealthMetric",
+  "schema_version": "1.0.0",
+  "metric_id": "90f7ed66-9eaf-465b-90d6-b60a7f9fae57",
+  "metric_name": "ingestion_latency_p95_ms",
+  "producer_id": null,
+  "schema_name": "control.telemetry.metric",
+  "window_start": "2026-02-25T09:00:00Z",
+  "window_end": "2026-02-25T09:05:00Z",
+  "value": 42.7,
+  "unit": "ms",
+  "labels": {
+    "region": "us-east-1",
+    "pipeline": "control-ingestion-v1"
+  }
+}

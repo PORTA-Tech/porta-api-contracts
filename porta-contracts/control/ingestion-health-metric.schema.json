@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://porta.dev/contracts/control/ingestion-health-metric.schema.json",
+  "title": "ControlPlaneIngestionHealthMetric",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": { "const": "ControlPlaneIngestionHealthMetric" },
+    "schema_version": { "const": "1.0.0" },
+    "metric_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "metric_name": {
+      "enum": [
+        "validation_failures_total",
+        "schema_mismatch_rate",
+        "ingestion_latency_p95_ms",
+        "producer_error_rate",
+        "signature_verification_failures_total"
+      ]
+    },
+    "producer_id": {
+      "type": ["string", "null"],
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+    },
+    "schema_name": {
+      "type": ["string", "null"],
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 128
+    },
+    "window_start": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" },
+    "window_end": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" },
+    "value": { "type": "number", "minimum": 0 },
+    "unit": { "enum": ["count", "ratio", "ms", "bytes"] },
+    "labels": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 128
+      }
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "metric_id",
+    "metric_name",
+    "window_start",
+    "window_end",
+    "value",
+    "unit",
+    "labels"
+  ]
+}

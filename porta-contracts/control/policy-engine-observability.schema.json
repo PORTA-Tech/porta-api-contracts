@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://porta.dev/contracts/control/policy-engine-observability.schema.json",
+  "title": "ControlPlanePolicyEngineObservabilityMetric",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": { "const": "ControlPlanePolicyEngineObservabilityMetric" },
+    "schema_version": { "const": "1.0.0" },
+    "metric_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "metric_name": {
+      "enum": [
+        "policy_evaluations_total",
+        "policy_trigger_total",
+        "intervention_signed_total",
+        "intervention_rejected_total",
+        "policy_cooldown_active_total",
+        "state_conflict_retries_total"
+      ]
+    },
+    "policy_id": {
+      "type": ["string", "null"],
+      "format": "uuid"
+    },
+    "window_start": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" },
+    "window_end": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" },
+    "value": { "type": "number", "minimum": 0 },
+    "labels": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 128
+      }
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "metric_id",
+    "metric_name",
+    "policy_id",
+    "window_start",
+    "window_end",
+    "value",
+    "labels"
+  ]
+}

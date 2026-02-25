@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://porta.dev/contracts/control/policy-execution-policy.schema.json",
+  "title": "ControlPlaneExecutionPolicy",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": { "const": "ControlPlaneExecutionPolicy" },
+    "schema_version": { "const": "1.0.0" },
+    "policy_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "enabled": { "type": "boolean" },
+    "priority": { "type": "integer", "minimum": 1, "maximum": 1000 },
+    "resource_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "service": { "type": "string", "minLength": 2, "maxLength": 128 },
+        "environment": { "type": "string", "minLength": 2, "maxLength": 64 },
+        "region": { "type": "string", "minLength": 2, "maxLength": 64 }
+      },
+      "required": ["service", "environment"]
+    },
+    "trigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_name": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$",
+          "minLength": 3,
+          "maxLength": 128
+        },
+        "metric_name": { "type": "string", "pattern": "^[a-z][a-z0-9_]{2,63}$" },
+        "aggregation": { "enum": ["avg", "p95", "p99", "max", "min"] },
+        "window_seconds": { "type": "integer", "minimum": 15, "maximum": 3600 }
+      },
+      "required": ["schema_name", "metric_name", "aggregation", "window_seconds"]
+    },
+    "condition": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operator": { "enum": [">", ">=", "<", "<=", "==", "!="] },
+        "threshold": { "type": "number" }
+      },
+      "required": ["operator", "threshold"]
+    },
+    "action": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": { "const": "scale_horizontal" },
+            "min_replicas": { "type": "integer", "minimum": 1, "maximum": 200 },
+            "max_replicas": { "type": "integer", "minimum": 1, "maximum": 200 },
+            "scale_step": { "type": "integer", "minimum": 1, "maximum": 20 }
+          },
+          "required": ["type", "min_replicas", "max_replicas", "scale_step"]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": { "const": "restart_pods" },
+            "max_parallel": { "type": "integer", "minimum": 1, "maximum": 20 }
+          },
+          "required": ["type", "max_parallel"]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": { "const": "traffic_shift" },
+            "shift_percentage": { "type": "integer", "minimum": 1, "maximum": 50 },
+            "target_cluster": { "type": "string", "minLength": 3, "maxLength": 128 }
+          },
+          "required": ["type", "shift_percentage", "target_cluster"]
+        }
+      ]
+    },
+    "cool_down_seconds": { "type": "integer", "minimum": 15, "maximum": 86400 },
+    "max_triggers_per_hour": { "type": "integer", "minimum": 1, "maximum": 3600 },
+    "created_at": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": { "const": "Ed25519" },
+        "key_id": { "const": "cp-root-key-01" },
+        "signature": { "type": "string", "pattern": "^[A-Za-z0-9+/=]{80,128}$" }
+      },
+      "required": ["algorithm", "key_id", "signature"]
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "policy_id",
+    "enabled",
+    "priority",
+    "resource_scope",
+    "trigger",
+    "condition",
+    "action",
+    "cool_down_seconds",
+    "max_triggers_per_hour",
+    "created_at",
+    "signature"
+  ]
+}

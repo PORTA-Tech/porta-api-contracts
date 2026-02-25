@@ -1,0 +1,118 @@
+{
+  "$id": "https://porta.dev/contracts/audit/rbac-access-decision.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": {
+      "const": "AuditRbacAccessDecision"
+    },
+    "decision": {
+      "enum": [
+        "allow",
+        "deny"
+      ]
+    },
+    "decision_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "error": {
+      "additionalProperties": false,
+      "properties": {
+        "error_code": {
+          "const": "RBAC_DENIED"
+        },
+        "message": {
+          "maxLength": 256,
+          "minLength": 8,
+          "type": "string"
+        },
+        "required_role": {
+          "enum": [
+            "admin",
+            "operator",
+            "auditor",
+            "developer",
+            "agent"
+          ]
+        },
+        "user_role": {
+          "enum": [
+            "admin",
+            "operator",
+            "auditor",
+            "developer",
+            "agent"
+          ]
+        }
+      },
+      "required": [
+        "error_code",
+        "required_role",
+        "user_role",
+        "message"
+      ],
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "operation": {
+      "enum": [
+        "create",
+        "update",
+        "delete",
+        "read",
+        "execute",
+        "simulate"
+      ]
+    },
+    "required_role": {
+      "enum": [
+        "admin",
+        "operator",
+        "auditor",
+        "developer",
+        "agent"
+      ]
+    },
+    "resource": {
+      "maxLength": 256,
+      "minLength": 3,
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "subject_id": {
+      "pattern": "^[A-Za-z0-9_.@:-]{3,128}$",
+      "type": "string"
+    },
+    "subject_role": {
+      "enum": [
+        "admin",
+        "operator",
+        "auditor",
+        "developer",
+        "agent"
+      ]
+    },
+    "timestamp": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp"
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "decision_id",
+    "timestamp",
+    "subject_id",
+    "subject_role",
+    "required_role",
+    "resource",
+    "operation",
+    "decision",
+    "error"
+  ],
+  "title": "AuditRbacAccessDecision",
+  "type": "object"
+}

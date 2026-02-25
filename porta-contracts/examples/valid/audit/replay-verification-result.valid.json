@@ -1,0 +1,16 @@
+{
+  "contract_name": "AuditReplayVerificationResult",
+  "schema_version": "1.0.0",
+  "verification_id": "912d2761-6456-473c-ab44-ea9acb6e12b0",
+  "trace_id": "018f9b91-1c22-7a12-bfa3-0a11819a9987",
+  "verified_at": "2026-02-22T15:25:00Z",
+  "result": "mismatch",
+  "differences": [
+    {
+      "field_name": "action_parameters.desired_replicas",
+      "expected_value": 10,
+      "actual_value": 8
+    }
+  ],
+  "signature_verification": "verified"
+}

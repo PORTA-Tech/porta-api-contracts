@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "rotation_period_days": 90,
+  "active_keys": [
+    "cp-root-key-01",
+    "cp-root-key-00"
+  ],
+  "keys": [
+    {
+      "key_id": "cp-root-key-01",
+      "algorithm": "Ed25519",
+      "status": "active",
+      "created_at": "2026-02-01T00:00:00Z",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA9s2Q4I2xA9JjznH8r0fXk3FfGLmEz6h6NQ8EP6HbPqQ=\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "key_id": "cp-root-key-00",
+      "algorithm": "Ed25519",
+      "status": "active_previous",
+      "created_at": "2025-11-03T00:00:00Z",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAFD4KTQb2Px+NvhA5WqY4j8Q5s6heD2+Y0n6wAqk4pcE=\n-----END PUBLIC KEY-----\n"
+    }
+  ]
+}

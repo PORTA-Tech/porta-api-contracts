@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://porta.dev/contracts/control/typed-ingestion-envelope.schema.json",
+  "title": "ControlPlaneTypedIngestionEnvelope",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": { "const": "ControlPlaneTypedIngestionEnvelope" },
+    "schema_version": { "const": "1.0.0" },
+    "ingestion_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "schema_name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 128
+    },
+    "declared_schema_version": { "$ref": "../shared/common-defs.schema.json#/$defs/semver" },
+    "producer_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+    },
+    "timestamp": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" },
+    "payload": {
+      "type": "object",
+      "minProperties": 1
+    },
+    "canonicalization": { "const": "JCS-RFC8785" },
+    "signature": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": { "const": "Ed25519" },
+        "signing_key_id": {
+          "type": "string",
+          "pattern": "^kid-[A-Za-z0-9-]{4,64}$"
+        },
+        "signature": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{86,128}$"
+        }
+      },
+      "required": ["algorithm", "signing_key_id", "signature"]
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "ingestion_id",
+    "schema_name",
+    "declared_schema_version",
+    "producer_id",
+    "timestamp",
+    "payload",
+    "canonicalization"
+  ]
+}

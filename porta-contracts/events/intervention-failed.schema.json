@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://porta.dev/contracts/events/intervention-failed.schema.json",
+  "title": "InterventionFailedEvent",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": { "const": "InterventionFailedEvent" },
+    "schema_version": { "const": "1.0.0" },
+    "event_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "machine_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "event_type": { "const": "intervention.failed" },
+    "timestamp": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" },
+    "ingestion_timestamp": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "intervention_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+        "policy_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+        "error_code": { "type": "string", "pattern": "^[A-Z0-9_]{3,64}$" },
+        "error_class": { "enum": ["validation", "execution", "authorization", "dependency"] },
+        "failed_at": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" }
+      },
+      "required": ["intervention_id", "policy_id", "error_code", "error_class", "failed_at"]
+    }
+  },
+  "required": ["contract_name", "schema_version", "event_id", "machine_id", "event_type", "timestamp", "ingestion_timestamp", "payload"]
+}

@@ -1,0 +1,18 @@
+{
+  "contract_name": "AuditRbacAccessDecision",
+  "schema_version": "1.0.0",
+  "decision_id": "69a48d93-67f3-4f4d-89dc-4e847f4c7346",
+  "timestamp": "2026-02-22T15:20:00Z",
+  "subject_id": "sam.audit@porta",
+  "subject_role": "auditor",
+  "required_role": "operator",
+  "resource": "/api/v1/interventions/manual-trigger",
+  "operation": "execute",
+  "decision": "deny",
+  "error": {
+    "error_code": "RBAC_DENIED",
+    "required_role": "operator",
+    "user_role": "auditor",
+    "message": "You do not have permission to execute this action."
+  }
+}

@@ -1,0 +1,19 @@
+{
+    "contract_name":  "PolicyEvaluatedEvent",
+    "schema_version":  "0.0.0",
+    "event_id":  "aaaa1111-1111-4111-8111-111111111111",
+    "machine_id":  "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+    "event_type":  "policy.evaluated",
+    "timestamp":  "2026-02-23T15:00:09Z",
+    "ingestion_timestamp":  "2026-02-23T15:00:09Z",
+    "payload":  {
+                    "policy_id":  "33333333-3333-4333-8333-333333333333",
+                    "policy_version":  "1.0.0",
+                    "state_id":  "22222222-2222-4222-8222-222222222222",
+                    "match":  true,
+                    "reason_codes":  [
+                                         "probability_gt_threshold",
+                                         "confidence_gt_threshold"
+                                     ]
+                }
+}

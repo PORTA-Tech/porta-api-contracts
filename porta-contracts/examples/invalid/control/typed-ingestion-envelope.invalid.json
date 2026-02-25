@@ -1,0 +1,10 @@
+{
+  "contract_name": "ControlPlaneTypedIngestionEnvelope",
+  "schema_version": "1.0.0",
+  "ingestion_id": "f7ca7f6d-d71c-4518-b94a-f6ec84895e32",
+  "schema_name": "control.telemetry.metric",
+  "declared_schema_version": "1.2",
+  "timestamp": "2026-02-25T09:17:00Z",
+  "payload": {},
+  "canonicalization": "JCS-RFC8785"
+}

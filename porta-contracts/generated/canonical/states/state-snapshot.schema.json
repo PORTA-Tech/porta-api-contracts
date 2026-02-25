@@ -1,0 +1,94 @@
+{
+  "$id": "https://porta.dev/contracts/states/state-snapshot.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "baseline_deviation_factor": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "confidence": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/probability"
+    },
+    "contract_name": {
+      "const": "StateSnapshot"
+    },
+    "contributing_primitives": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "deviation": {
+            "type": "number"
+          },
+          "name": {
+            "pattern": "^[a-z][a-z0-9_]{2,63}$",
+            "type": "string"
+          },
+          "weight": {
+            "maximum": 1,
+            "minimum": 0,
+            "type": "number"
+          }
+        },
+        "required": [
+          "name",
+          "weight",
+          "deviation"
+        ],
+        "type": "object"
+      },
+      "maxItems": 16,
+      "minItems": 1,
+      "type": "array"
+    },
+    "evaluated_at": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp"
+    },
+    "explanation": {
+      "maxLength": 512,
+      "minLength": 1,
+      "type": "string"
+    },
+    "machine_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "model_version": {
+      "pattern": "^[A-Za-z0-9_.-]{1,64}$",
+      "type": "string"
+    },
+    "probability": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/probability"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "state_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "state_name": {
+      "enum": [
+        "stable",
+        "elevated_risk",
+        "degrading",
+        "critical",
+        "recovering"
+      ]
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "state_id",
+    "machine_id",
+    "state_name",
+    "probability",
+    "confidence",
+    "contributing_primitives",
+    "explanation",
+    "baseline_deviation_factor",
+    "evaluated_at",
+    "model_version"
+  ],
+  "title": "StateSnapshot",
+  "type": "object"
+}

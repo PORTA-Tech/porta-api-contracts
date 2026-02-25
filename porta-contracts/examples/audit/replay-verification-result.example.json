@@ -1,0 +1,10 @@
+{
+  "contract_name": "AuditReplayVerificationResult",
+  "schema_version": "1.0.0",
+  "verification_id": "ce688ee0-585d-4a3b-afe4-8752155888ed",
+  "trace_id": "018f9b91-1c22-7a12-bfa3-0a11819a9987",
+  "verified_at": "2026-02-22T15:25:00Z",
+  "result": "match",
+  "differences": [],
+  "signature_verification": "verified"
+}

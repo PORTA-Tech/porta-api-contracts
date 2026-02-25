@@ -1,0 +1,77 @@
+{
+  "$id": "https://porta.dev/contracts/control/ingestion-validation-result.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "compatibility_result": {
+      "enum": [
+        "compatible",
+        "incompatible_major",
+        "incompatible_minor",
+        "strict_mismatch",
+        "unknown_schema_version"
+      ]
+    },
+    "contract_name": {
+      "const": "ControlPlaneIngestionValidationResult"
+    },
+    "decision": {
+      "enum": [
+        "accept",
+        "reject"
+      ]
+    },
+    "declared_schema_version": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/semver"
+    },
+    "error_code": {
+      "pattern": "^[A-Z0-9_]{3,64}$",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "producer_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$",
+      "type": "string"
+    },
+    "result_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "schema_name": {
+      "maxLength": 128,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "validated_at": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp"
+    },
+    "verification_result": {
+      "enum": [
+        "verified",
+        "not_required",
+        "invalid_signature",
+        "unknown_key",
+        "revoked_key"
+      ]
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "result_id",
+    "schema_name",
+    "declared_schema_version",
+    "producer_id",
+    "validated_at",
+    "decision",
+    "verification_result",
+    "compatibility_result"
+  ],
+  "title": "ControlPlaneIngestionValidationResult",
+  "type": "object"
+}

@@ -1,0 +1,14 @@
+{
+  "contract_name": "AgentErrorEvent",
+  "schema_version": "1.0.0",
+  "event_id": "eeee1111-1111-4111-8111-111111111111",
+  "machine_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+  "event_type": "agent.error",
+  "timestamp": "2026-02-23T15:00:13Z",
+  "ingestion_timestamp": "2026-02-23T15:00:13Z",
+  "payload": {
+    "error_code": "HOOK_BACKPRESSURE",
+    "severity": "medium",
+    "retryable": true
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "$id": "https://porta.dev/contracts/control/policy-engine-state.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": {
+      "const": "ControlPlanePolicyEngineState"
+    },
+    "environment": {
+      "maxLength": 64,
+      "minLength": 2,
+      "type": "string"
+    },
+    "last_policy_trigger": {
+      "format": "uuid",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "last_scale_time": {
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "replicas": {
+      "maximum": 2000,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "service": {
+      "maxLength": 128,
+      "minLength": 2,
+      "type": "string"
+    },
+    "state_key": {
+      "pattern": "^/state/[a-z0-9._-]+/[a-z0-9._-]+$",
+      "type": "string"
+    },
+    "trigger_count_last_hour": {
+      "maximum": 1000000,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "updated_at": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp"
+    },
+    "version": {
+      "maximum": 2147483647,
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "state_key",
+    "environment",
+    "service",
+    "replicas",
+    "last_scale_time",
+    "last_policy_trigger",
+    "trigger_count_last_hour",
+    "version",
+    "updated_at"
+  ],
+  "title": "ControlPlanePolicyEngineState",
+  "type": "object"
+}

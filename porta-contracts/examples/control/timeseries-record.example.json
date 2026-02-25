@@ -1,0 +1,21 @@
+{
+  "contract_name": "ControlPlaneTimeSeriesRecord",
+  "schema_version": "1.0.0",
+  "record_id": "ecf2c189-8e44-446d-8a6f-7263329239bb",
+  "schema_name": "control.telemetry.metric",
+  "validated_schema_version": "1.2.0",
+  "producer_id": "edge-node-17",
+  "timestamp": "2026-02-25T09:11:02Z",
+  "ingestion_time": "2026-02-25T09:11:03Z",
+  "payload": {
+    "metric_name": "cpu_utilization",
+    "value": 71.9,
+    "unit": "percent",
+    "window_duration_seconds": 10
+  },
+  "payload_canonical": "{\"metric_name\":\"cpu_utilization\",\"unit\":\"percent\",\"value\":71.9,\"window_duration_seconds\":10}",
+  "validation_hash": "241628007f4580532f5f5c4bb2ed7afde44713981f8ff0f2484d1214f95bf934",
+  "signature_hash": "3f2a8dcaea4de4ef1f260f66ed080f31f081f5716c89f1ca53f4714f52dc6ce8",
+  "signature_verification_result": "verified",
+  "immutability_mode": "append_only"
+}

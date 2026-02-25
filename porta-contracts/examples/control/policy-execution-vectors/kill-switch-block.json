@@ -1,0 +1,66 @@
+{
+  "vector_id": "kill-switch-block",
+  "now": "2026-02-22T15:18:00Z",
+  "kill_switch_enabled": false,
+  "metrics": [
+    {
+      "schema_name": "control.telemetry.metric",
+      "environment": "prod",
+      "service": "payments-api",
+      "region": "us-east-1",
+      "metric_name": "cpu_usage_percent",
+      "aggregation": "p95",
+      "window_seconds": 60,
+      "value": 99.0
+    },
+    {
+      "schema_name": "control.telemetry.metric",
+      "environment": "prod",
+      "service": "payments-api",
+      "metric_name": "memory_usage_percent",
+      "aggregation": "avg",
+      "window_seconds": 300,
+      "value": 99.0
+    },
+    {
+      "schema_name": "control.telemetry.metric",
+      "environment": "prod",
+      "service": "checkout-api",
+      "metric_name": "http_latency_ms",
+      "aggregation": "p99",
+      "window_seconds": 120,
+      "value": 1200
+    }
+  ],
+  "runtime": {
+    "cluster_interventions_last_hour": 0,
+    "scale_added_last_10m_by_service": {},
+    "traffic_shift_last_hour_by_service": {},
+    "policy_runtime": {
+      "018f9b74-ff6a-7b10-baa1-6f4e77a2d901": { "last_trigger_at": null, "triggers_last_hour": 0 },
+      "018f9b75-43c2-7e30-91fa-924ae9ab4c33": { "last_trigger_at": null, "triggers_last_hour": 0 },
+      "018f9b76-a2de-7023-bbb3-6a51a911e2d0": { "last_trigger_at": null, "triggers_last_hour": 0 }
+    },
+    "service_state": {
+      "prod/payments-api": { "replicas": 8, "version": 41, "trigger_count_last_hour": 3 },
+      "prod/checkout-api": { "replicas": 12, "version": 10, "trigger_count_last_hour": 1 }
+    }
+  },
+  "expected": {
+    "triggered_policy_ids_in_order": [],
+    "blocked_policy_ids": [
+      "018f9b76-a2de-7023-bbb3-6a51a911e2d0",
+      "018f9b74-ff6a-7b10-baa1-6f4e77a2d901",
+      "018f9b75-43c2-7e30-91fa-924ae9ab4c33"
+    ],
+    "signed_intervention_count": 0,
+    "final_versions": {
+      "prod/payments-api": 41,
+      "prod/checkout-api": 10
+    },
+    "final_replicas": {
+      "prod/payments-api": 8,
+      "prod/checkout-api": 12
+    }
+  }
+}

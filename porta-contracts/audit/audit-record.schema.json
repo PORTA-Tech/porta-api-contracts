@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://porta.dev/contracts/audit/audit-record.schema.json",
+  "title": "AuditRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": { "const": "AuditRecord" },
+    "schema_version": { "const": "1.0.0" },
+    "audit_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "machine_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "correlation_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "event_chain": {
+      "type": "array",
+      "items": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+      "minItems": 1,
+      "maxItems": 512
+    },
+    "evaluated_policy": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "resulting_state": { "enum": ["stable", "elevated_risk", "degrading", "critical", "recovering"] },
+    "issued_intervention": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "rbac_actor": { "type": "string", "pattern": "^[a-z0-9_.@-]{3,128}$" },
+    "decision_trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "input_state_snapshot": { "$ref": "../states/state-snapshot.schema.json" },
+        "policy_path": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[a-zA-Z0-9_.-]{1,128}$" },
+          "minItems": 1,
+          "maxItems": 64
+        },
+        "escalation_level": { "type": "integer", "minimum": 1, "maximum": 4 },
+        "outcome": { "enum": ["issued", "suppressed", "skipped", "failed"] }
+      },
+      "required": ["input_state_snapshot", "policy_path", "escalation_level", "outcome"]
+    },
+    "created_at": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" },
+    "retention_class": { "enum": ["short_term", "regulatory", "security", "permanent"] }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "audit_id",
+    "machine_id",
+    "correlation_id",
+    "event_chain",
+    "evaluated_policy",
+    "resulting_state",
+    "issued_intervention",
+    "rbac_actor",
+    "decision_trace",
+    "created_at",
+    "retention_class"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "contract_name": "ControlPlaneTypedIngestionEnvelope",
+  "schema_version": "1.0.0",
+  "ingestion_id": "c4b22f62-302d-4f00-b740-2366ae7fd03f",
+  "schema_name": "control.telemetry.metric",
+  "declared_schema_version": "1.2.0",
+  "producer_id": "edge-node-17",
+  "timestamp": "2026-02-25T09:15:00Z",
+  "payload": {
+    "metric_name": "memory_utilization",
+    "value": 58.4,
+    "unit": "percent",
+    "window_duration_seconds": 10
+  },
+  "canonicalization": "JCS-RFC8785",
+  "signature": {
+    "algorithm": "Ed25519",
+    "signing_key_id": "kid-a13f09bc-v3",
+    "signature": "UwLYN6_FKrrxxjKydWWLD991kW0USHFAvbpZqrIX_SB-8ZVvNhrMdSIdZpTfs9zjRaCc7A1O3uF1kYqMTpTGBw"
+  }
+}

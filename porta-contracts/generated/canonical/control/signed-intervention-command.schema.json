@@ -1,0 +1,107 @@
+{
+  "$id": "https://porta.dev/contracts/control/signed-intervention-command.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "enum": [
+        "scale_horizontal",
+        "restart_pods",
+        "traffic_shift"
+      ]
+    },
+    "command_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "command_schema_version": {
+      "const": "intervention.command.v1.0.0"
+    },
+    "contract_name": {
+      "const": "ControlPlaneSignedInterventionCommand"
+    },
+    "expires_at": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp"
+    },
+    "issued_at": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp"
+    },
+    "parameters": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "integer"
+          }
+        ]
+      },
+      "maxProperties": 32,
+      "type": "object"
+    },
+    "policy_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "signature": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "const": "Ed25519"
+        },
+        "key_id": {
+          "const": "cp-root-key-01"
+        },
+        "signature": {
+          "pattern": "^[A-Za-z0-9+/=]{80,128}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "algorithm",
+        "key_id",
+        "signature"
+      ],
+      "type": "object"
+    },
+    "signature_input_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "state_version": {
+      "maximum": 2147483647,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "target_service": {
+      "maxLength": 128,
+      "minLength": 2,
+      "type": "string"
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "command_schema_version",
+    "command_id",
+    "policy_id",
+    "target_service",
+    "action",
+    "parameters",
+    "issued_at",
+    "expires_at",
+    "state_version",
+    "signature_input_hash",
+    "signature"
+  ],
+  "title": "ControlPlaneSignedInterventionCommand",
+  "type": "object"
+}

@@ -1,0 +1,17 @@
+{
+  "contract_name": "ControlPlaneTypedIngestionEnvelope",
+  "schema_version": "1.0.0",
+  "ingestion_id": "6d3cbb82-b62f-4cd0-a70a-72954d4cf755",
+  "schema_name": "control.telemetry.metric",
+  "declared_schema_version": "1.2.0",
+  "producer_id": "edge-node-17",
+  "timestamp": "2026-02-22T14:33:02Z",
+  "payload": {
+    "metric_name": "cpu_utilization",
+    "value": 71.9,
+    "unit": "percent",
+    "window_duration_seconds": 10
+  },
+  "canonicalization": "JCS-RFC8785",
+  "signature": null
+}

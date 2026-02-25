@@ -1,0 +1,21 @@
+{
+  "contract_name": "ControlPlaneTimeSeriesRecord",
+  "schema_version": "1.0.0",
+  "record_id": "e388f8de-ff92-4f83-9820-cf3efec7c6f5",
+  "schema_name": "control.telemetry.metric",
+  "validated_schema_version": "1.2.1",
+  "producer_id": "edge-node-23",
+  "timestamp": "2026-02-25T09:16:02Z",
+  "ingestion_time": "2026-02-25T09:16:03Z",
+  "payload": {
+    "metric_name": "disk_io_rate",
+    "value": 1172,
+    "unit": "bytes_per_second",
+    "window_duration_seconds": 10
+  },
+  "payload_canonical": "{\"metric_name\":\"disk_io_rate\",\"unit\":\"bytes_per_second\",\"value\":1172,\"window_duration_seconds\":10}",
+  "validation_hash": "f4af68e2b89ca8ceaa7f80ea95c2528a37f7e1d4dbf1184ec48df20581f8f3d9",
+  "signature_hash": null,
+  "signature_verification_result": "not_required",
+  "immutability_mode": "append_only"
+}

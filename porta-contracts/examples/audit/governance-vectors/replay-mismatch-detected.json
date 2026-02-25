@@ -1,0 +1,16 @@
+{
+  "vector_id": "replay-mismatch-detected",
+  "input": {
+    "stored_action_parameters": {
+      "desired_replicas": 10
+    },
+    "recomputed_action_parameters": {
+      "desired_replicas": 8
+    },
+    "signature_verification": "verified"
+  },
+  "expected": {
+    "result": "mismatch",
+    "difference_field": "desired_replicas"
+  }
+}

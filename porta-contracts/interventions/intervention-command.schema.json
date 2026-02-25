@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://porta.dev/contracts/interventions/intervention-command.schema.json",
+  "title": "InterventionCommand",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": { "const": "InterventionCommand" },
+    "schema_version": { "const": "1.0.0" },
+    "intervention_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "machine_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "intervention_type": { "enum": ["notify", "reduce_load", "restart_service", "isolate_component", "escalate_to_human", "pause_agent"] },
+    "policy_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "state_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "issued_at": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" },
+    "expires_at": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": {
+        "anyOf": [
+          { "type": "string" },
+          { "type": "number" },
+          { "type": "boolean" },
+          { "type": "integer" }
+        ]
+      },
+      "maxProperties": 32
+    },
+    "signature": { "type": "string", "pattern": "^[A-Za-z0-9+/=._-]{32,4096}$" },
+    "correlation_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "intervention_id",
+    "machine_id",
+    "intervention_type",
+    "policy_id",
+    "state_id",
+    "issued_at",
+    "expires_at",
+    "parameters",
+    "signature",
+    "correlation_id"
+  ]
+}

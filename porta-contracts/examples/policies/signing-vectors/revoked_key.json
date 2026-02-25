@@ -1,0 +1,92 @@
+{
+  "name": "revoked_key",
+  "expected": {
+    "valid": false,
+    "reason": "revoked_key"
+  },
+  "policy": {
+    "contract_name": "RegulationPolicy",
+    "schema_version": "2.0.0",
+    "policy_model_version": "deterministic-policy-v1.0.0",
+    "policy_id": "88888888-8888-4888-8888-888888888888",
+    "policy_name": "stabilized-risk-policy-v2",
+    "version": "2.0.0",
+    "created_by": "control-plane@porta",
+    "created_at": "2026-02-23T14:00:00Z",
+    "target_states": [
+      "elevated_risk",
+      "degrading",
+      "critical"
+    ],
+    "severity_min": 2,
+    "severity_max": 4,
+    "machine_selector": {
+      "type": "tags",
+      "tags": [
+        "prod",
+        "windows"
+      ]
+    },
+    "conditions": {
+      "operator": "AND",
+      "conditions": [
+        {
+          "field": "probability",
+          "op": ">=",
+          "value": 0.8
+        },
+        {
+          "field": "confidence",
+          "op": ">=",
+          "value": 0.7
+        },
+        {
+          "operator": "OR",
+          "conditions": [
+            {
+              "field": "state_name",
+              "op": "==",
+              "value": "degrading"
+            },
+            {
+              "field": "state_name",
+              "op": "==",
+              "value": "critical"
+            }
+          ]
+        }
+      ]
+    },
+    "stability_overrides": {
+      "min_dwell_seconds": 40,
+      "min_cooldown_seconds": 90,
+      "min_sustained_probability": 0.85
+    },
+    "interventions": [
+      {
+        "intervention_type": "notify",
+        "parameters": {
+          "message_code": "RISK_ELEVATED"
+        },
+        "priority": 1,
+        "max_frequency": "PT1M",
+        "requires_human_confirmation": false
+      },
+      {
+        "intervention_type": "require_ack",
+        "parameters": {
+          "channel": "on_call"
+        },
+        "priority": 2,
+        "max_frequency": "PT5M",
+        "requires_human_confirmation": true
+      }
+    ],
+    "signature": {
+      "algorithm": "Ed25519",
+      "signing_key_id": "kid-deadbeef-v1",
+      "signature": "VirVPs3gzqpmCqaqnHvmGOwqbLdNMgKXR6N-l7G4lzIqrwE582cZ4NjUkYCrDlhQGm8NQkRGC5UB_QvKs2jhCA",
+      "created_at": "2026-02-23T14:00:00Z"
+    }
+  }
+}

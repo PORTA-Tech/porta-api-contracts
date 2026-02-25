@@ -1,0 +1,19 @@
+{
+  "contract_name": "SignalSampleEvent",
+  "schema_version": "1.0.0",
+  "event_id": "77777777-7777-4777-8777-777777777777",
+  "machine_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+  "event_type": "signal.sample",
+  "timestamp": "2026-02-23T15:00:00Z",
+  "ingestion_timestamp": "2026-02-23T15:00:01Z",
+  "payload": {
+    "sample_interval_ms": 1000,
+    "keyboard_interval_ms": 145.2,
+    "mouse_acceleration": 1.32,
+    "scroll_velocity": 4.1,
+    "focus_switch_count": 3,
+    "idle_fragmentation": 0.12,
+    "notification_reaction_ms": 823,
+    "config_change_count": 0
+  }
+}

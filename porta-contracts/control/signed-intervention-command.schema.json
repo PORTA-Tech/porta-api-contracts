@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://porta.dev/contracts/control/signed-intervention-command.schema.json",
+  "title": "ControlPlaneSignedInterventionCommand",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": { "const": "ControlPlaneSignedInterventionCommand" },
+    "schema_version": { "const": "1.0.0" },
+    "command_schema_version": { "const": "intervention.command.v1.0.0" },
+    "command_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "policy_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "target_service": { "type": "string", "minLength": 2, "maxLength": 128 },
+    "action": { "enum": ["scale_horizontal", "restart_pods", "traffic_shift"] },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": {
+        "anyOf": [
+          { "type": "string" },
+          { "type": "number" },
+          { "type": "boolean" },
+          { "type": "integer" }
+        ]
+      },
+      "maxProperties": 32
+    },
+    "issued_at": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" },
+    "expires_at": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" },
+    "state_version": { "type": "integer", "minimum": 0, "maximum": 2147483647 },
+    "signature_input_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": { "const": "Ed25519" },
+        "key_id": { "const": "cp-root-key-01" },
+        "signature": { "type": "string", "pattern": "^[A-Za-z0-9+/=]{80,128}$" }
+      },
+      "required": ["algorithm", "key_id", "signature"]
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "command_schema_version",
+    "command_id",
+    "policy_id",
+    "target_service",
+    "action",
+    "parameters",
+    "issued_at",
+    "expires_at",
+    "state_version",
+    "signature_input_hash",
+    "signature"
+  ]
+}

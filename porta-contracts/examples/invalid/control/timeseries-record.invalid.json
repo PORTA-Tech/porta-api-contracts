@@ -1,0 +1,19 @@
+{
+  "contract_name": "ControlPlaneTimeSeriesRecord",
+  "schema_version": "1.0.0",
+  "record_id": "d8a77f45-b13b-45df-ab53-467f9baf99bc",
+  "schema_name": "control.telemetry.metric",
+  "validated_schema_version": "1.2.0",
+  "producer_id": "edge-node-23",
+  "timestamp": "2026-02-25T09:18:02Z",
+  "ingestion_time": "2026-02-25T09:18:03Z",
+  "payload": {
+    "metric_name": "network_throughput",
+    "value": 4421
+  },
+  "payload_canonical": "{}",
+  "validation_hash": "not-a-hash",
+  "signature_hash": null,
+  "signature_verification_result": "not_required",
+  "immutability_mode": "append_only"
+}

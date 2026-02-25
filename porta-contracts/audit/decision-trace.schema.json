@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://porta.dev/contracts/audit/decision-trace.schema.json",
+  "title": "AuditDecisionTrace",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": { "const": "AuditDecisionTrace" },
+    "schema_version": { "const": "1.0.0" },
+    "trace_schema_version": { "const": "audit.decision.v1.0.0" },
+    "trace_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "timestamp": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" },
+    "policy_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "state_version": { "type": "integer", "minimum": 0, "maximum": 2147483647 },
+    "target_service": { "type": "string", "minLength": 2, "maxLength": 128 },
+    "metrics_snapshot": {
+      "type": "object",
+      "additionalProperties": {
+        "anyOf": [
+          { "type": "number" },
+          { "type": "integer" },
+          { "type": "string" },
+          { "type": "boolean" }
+        ]
+      },
+      "minProperties": 1,
+      "maxProperties": 128
+    },
+    "condition_result": { "type": "boolean" },
+    "action_decision": { "enum": ["intervene", "skip", "cooldown", "blocked"] },
+    "action_parameters": {
+      "type": "object",
+      "additionalProperties": {
+        "anyOf": [
+          { "type": "number" },
+          { "type": "integer" },
+          { "type": "string" },
+          { "type": "boolean" }
+        ]
+      },
+      "maxProperties": 64
+    },
+    "confidence_score": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "triggered_by": { "type": "string", "pattern": "^[a-z0-9_.-]{3,64}$" },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": { "const": "Ed25519" },
+        "key_id": { "const": "cp-root-key-01" },
+        "signature": { "type": "string", "pattern": "^[A-Za-z0-9+/=]{80,128}$" }
+      },
+      "required": ["algorithm", "key_id", "signature"]
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "trace_schema_version",
+    "trace_id",
+    "timestamp",
+    "policy_id",
+    "state_version",
+    "target_service",
+    "metrics_snapshot",
+    "condition_result",
+    "action_decision",
+    "action_parameters",
+    "triggered_by",
+    "signature"
+  ]
+}

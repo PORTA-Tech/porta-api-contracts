@@ -1,0 +1,13 @@
+{
+  "contract_name": "ControlPlanePolicyEngineState",
+  "schema_version": "1.0.0",
+  "state_key": "/state/prod/checkout-api",
+  "environment": "prod",
+  "service": "checkout-api",
+  "replicas": 12,
+  "last_scale_time": "2026-02-22T15:05:00Z",
+  "last_policy_trigger": "018f9b76-a2de-7023-bbb3-6a51a911e2d0",
+  "trigger_count_last_hour": 1,
+  "version": 10,
+  "updated_at": "2026-02-22T15:12:30Z"
+}

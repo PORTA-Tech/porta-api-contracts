@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://porta.dev/contracts/audit/rbac-access-decision.schema.json",
+  "title": "AuditRbacAccessDecision",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": { "const": "AuditRbacAccessDecision" },
+    "schema_version": { "const": "1.0.0" },
+    "decision_id": { "$ref": "../shared/common-defs.schema.json#/$defs/uuid" },
+    "timestamp": { "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp" },
+    "subject_id": { "type": "string", "pattern": "^[A-Za-z0-9_.@:-]{3,128}$" },
+    "subject_role": { "enum": ["admin", "operator", "auditor", "developer", "agent"] },
+    "required_role": { "enum": ["admin", "operator", "auditor", "developer", "agent"] },
+    "resource": { "type": "string", "minLength": 3, "maxLength": 256 },
+    "operation": { "enum": ["create", "update", "delete", "read", "execute", "simulate"] },
+    "decision": { "enum": ["allow", "deny"] },
+    "error": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "error_code": { "const": "RBAC_DENIED" },
+        "required_role": { "enum": ["admin", "operator", "auditor", "developer", "agent"] },
+        "user_role": { "enum": ["admin", "operator", "auditor", "developer", "agent"] },
+        "message": { "type": "string", "minLength": 8, "maxLength": 256 }
+      },
+      "required": ["error_code", "required_role", "user_role", "message"]
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "decision_id",
+    "timestamp",
+    "subject_id",
+    "subject_role",
+    "required_role",
+    "resource",
+    "operation",
+    "decision",
+    "error"
+  ]
+}

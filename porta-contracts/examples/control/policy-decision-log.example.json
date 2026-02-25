@@ -1,0 +1,25 @@
+{
+  "contract_name": "ControlPlanePolicyDecisionLog",
+  "schema_version": "1.0.0",
+  "decision_id": "892ade9f-2cab-4dc1-8406-95157fe0878f",
+  "evaluated_at": "2026-02-22T15:12:30Z",
+  "policy_id": "018f9b74-ff6a-7b10-baa1-6f4e77a2d901",
+  "policy_hash": "9f7286904ef2c64ec7675927da67f6b9f7366dc2acc04ea80ce6f2fb4fd73c40",
+  "input_metrics": [
+    {
+      "schema_name": "control.telemetry.metric",
+      "metric_name": "cpu_usage_percent",
+      "aggregation": "p95",
+      "window_seconds": 60,
+      "value": 88.7
+    }
+  ],
+  "condition_evaluation": {
+    "operator": ">",
+    "threshold": 85,
+    "actual_value": 88.7,
+    "matched": true
+  },
+  "decision_result": "triggered",
+  "policy_order_index": 1
+}

@@ -1,0 +1,88 @@
+{
+  "$id": "https://porta.dev/contracts/events/signal-sample.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "contract_name": {
+      "const": "SignalSampleEvent"
+    },
+    "event_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "event_type": {
+      "const": "signal.sample"
+    },
+    "ingestion_timestamp": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp"
+    },
+    "machine_id": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/uuid"
+    },
+    "payload": {
+      "additionalProperties": false,
+      "properties": {
+        "config_change_count": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "focus_switch_count": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "idle_fragmentation": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "keyboard_interval_ms": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "mouse_acceleration": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "notification_reaction_ms": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "sample_interval_ms": {
+          "maximum": 60000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "scroll_velocity": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "sample_interval_ms",
+        "keyboard_interval_ms",
+        "mouse_acceleration",
+        "scroll_velocity",
+        "focus_switch_count",
+        "idle_fragmentation",
+        "notification_reaction_ms",
+        "config_change_count"
+      ],
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "timestamp": {
+      "$ref": "../shared/common-defs.schema.json#/$defs/isoTimestamp"
+    }
+  },
+  "required": [
+    "contract_name",
+    "schema_version",
+    "event_id",
+    "machine_id",
+    "event_type",
+    "timestamp",
+    "ingestion_timestamp",
+    "payload"
+  ],
+  "title": "SignalSampleEvent",
+  "type": "object"
+}

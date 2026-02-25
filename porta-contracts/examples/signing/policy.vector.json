@@ -1,0 +1,10 @@
+{
+  "target": "policy",
+  "algorithm": "ed25519",
+  "key_id": "policy-key-1",
+  "payload": {
+    "version": "1.0.0",
+    "created_at": "2026-02-23T00:00:00Z"
+  },
+  "signature_base64": "QWxhZGRpbjpPcGVuU2VzYW1l"
+}
