@@ -7,7 +7,10 @@ export type CalibrationStage = 'cold' | 'provisional' | 'calibrated';
 export type TrustTier = 'low' | 'medium' | 'high';
 
 export interface MachineSummaryReport {
+  deviceId: string;
   machineId: string;
+  accountId?: string | null;
+  orgId?: string | null;
   machineName: string;
   userName: string;
   agentVersion: string;

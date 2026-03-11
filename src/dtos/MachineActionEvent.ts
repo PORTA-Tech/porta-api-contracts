@@ -21,7 +21,10 @@ export type MachineActionVerifiedState =
   | 'verified';
 
 export interface MachineActionEvent {
+  deviceId: string;
   machineId: string;
+  accountId?: string | null;
+  orgId?: string | null;
   userName: string;
   interventionId: string;
   action: string;
