@@ -37,6 +37,12 @@ export interface MachineSummaryReport {
   backendConnected: boolean;
   localApiAuthReady: boolean;
   dbMigrationFailed: boolean;
+  // Canonical durable focus-episode fields. These are the product-facing fields
+  // that operator and fleet surfaces should prefer over the legacy continuity
+  // transport aliases below.
+  focusEpisodeQuality: number;
+  focusEpisodeSeconds: number;
+  focusEpisodeState: ContinuityState;
   // Legacy compatibility fields:
   // taskContinuityScore/taskContinuitySeconds currently carry the durable focus timer
   // signal used by downstream repos. The canonical product target is focus-episode

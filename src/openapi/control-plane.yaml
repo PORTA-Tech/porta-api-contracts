@@ -1340,6 +1340,9 @@ components:
           backend_connected,
           local_api_auth_ready,
           db_migration_failed,
+          focus_episode_quality,
+          focus_episode_seconds,
+          focus_episode_state,
           task_continuity_score,
           task_continuity_seconds,
           continuity_state,
@@ -1415,6 +1418,17 @@ components:
           type: boolean
         db_migration_failed:
           type: boolean
+        focus_episode_quality:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Canonical durable focus-episode quality field. Prefer this over task_continuity_score when presenting product truth.
+        focus_episode_seconds:
+          type: number
+          minimum: 0
+          description: Canonical durable focus-episode duration. This is the user-facing focus timer and must not be treated as current foreground-app age.
+        focus_episode_state:
+          $ref: '#/components/schemas/ContinuityStateValue'
         task_continuity_score:
           type: number
           minimum: 0
