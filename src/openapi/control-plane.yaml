@@ -1343,6 +1343,10 @@ components:
           focus_episode_quality,
           focus_episode_seconds,
           focus_episode_state,
+          attention_segment_kind,
+          attention_segment_seconds,
+          distraction_episode_active,
+          distraction_episode_seconds,
           task_continuity_score,
           task_continuity_seconds,
           continuity_state,
@@ -1429,6 +1433,21 @@ components:
           description: Canonical durable focus-episode duration. This is the user-facing focus timer and must not be treated as current foreground-app age.
         focus_episode_state:
           $ref: '#/components/schemas/ContinuityStateValue'
+        attention_segment_kind:
+          type: string
+          enum: [focus, context_excursion, off_task_distraction, fragmentation_distraction, away]
+          description: Canonical current attention segment. This distinguishes steady focus from short context excursions, distraction episodes, and away time.
+        attention_segment_seconds:
+          type: number
+          minimum: 0
+          description: Duration of the current attention segment in seconds.
+        distraction_episode_active:
+          type: boolean
+          description: True only when the current attention segment is a real distraction episode.
+        distraction_episode_seconds:
+          type: number
+          minimum: 0
+          description: Duration of the current distraction episode in seconds. Away time and short context excursions do not count here.
         task_continuity_score:
           type: number
           minimum: 0

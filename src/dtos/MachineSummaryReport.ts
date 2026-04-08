@@ -6,6 +6,13 @@ export type CalibrationStage = 'cold' | 'provisional' | 'calibrated';
 
 export type TrustTier = 'low' | 'medium' | 'high';
 
+export type AttentionSegmentKind =
+  | 'focus'
+  | 'context_excursion'
+  | 'off_task_distraction'
+  | 'fragmentation_distraction'
+  | 'away';
+
 export interface MachineSummaryReport {
   deviceId: string;
   machineId: string;
@@ -43,6 +50,13 @@ export interface MachineSummaryReport {
   focusEpisodeQuality: number;
   focusEpisodeSeconds: number;
   focusEpisodeState: ContinuityState;
+  // Canonical current attention-segment fields. These expose whether the machine
+  // is in steady focus, a short context excursion, off-task distraction,
+  // fragmentation distraction, or away time.
+  attentionSegmentKind: AttentionSegmentKind;
+  attentionSegmentSeconds: number;
+  distractionEpisodeActive: boolean;
+  distractionEpisodeSeconds: number;
   // Legacy compatibility fields:
   // taskContinuityScore/taskContinuitySeconds currently carry the durable focus timer
   // signal used by downstream repos. The canonical product target is focus-episode
