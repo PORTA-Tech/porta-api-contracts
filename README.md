@@ -78,6 +78,57 @@ npm test
 4. Regenerate downstream clients/types where applicable.
 5. Run CI gates (build/types/tests/contracts/compat/client-generation/schema-drift).
 
+## Behavior Glossary
+
+These product meanings are canonical even where current transport or DTO fields still use older compatibility names:
+
+- `focus episode`
+  - The durable unit of user-facing focus time.
+  - It is not the same thing as current foreground-app age.
+- `distraction episode`
+  - A tracked, non-idle segment where the user is no longer continuing the same focus episode because they are off-context or in sustained fragmentation.
+- `away segment`
+  - Idle or away time.
+  - It is not the same thing as distraction.
+- `pressure`
+  - The expressive user-facing overload score.
+- `overload active`
+  - The conservative stabilized state used for interventions and system actions.
+- `short break`
+  - The lighter break intervention with shorter recovery.
+- `long break`
+  - The stronger break intervention with longer recovery.
+- `limited`
+  - Ari still has usable truth, but certainty is reduced by missing channels, trust limits, or runtime constraints.
+- `updating`
+  - Ari is showing the last known usable value while fresh analyzed state catches up.
+
+## Legacy Migration Map
+
+These compatibility mappings must stay explicit until downstream repos finish the product migration:
+
+- `taskContinuitySeconds`
+  - Legacy machine-summary field currently used as the durable focus timer.
+  - Canonical target: `focus episode` duration.
+- `taskContinuityScore`
+  - Legacy continuity strength field.
+  - Canonical target: compatibility input for focus-episode quality until episode-native fields land.
+- `overloadLikelihood`
+  - Legacy visible overload field.
+  - Canonical target: `pressure`.
+- `overloadActive`
+  - Already close to the final meaning.
+  - Canonical target: `overload active`.
+- `breakPendingAction`
+  - Legacy compatibility field that still carries action IDs such as `stretch_break_suggestion` and `break_suggestion`.
+  - Canonical target: short-break or long-break readiness / overlay routing.
+- `stretch_break_suggestion`
+  - Legacy action ID for the product-facing `short break`.
+- `break_suggestion`
+  - Legacy action ID for the product-facing `long break`.
+
+This repo should treat those names as compatibility transport, not final product language.
+
 ## Boundaries
 
 This repo does not own:

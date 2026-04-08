@@ -37,13 +37,22 @@ export interface MachineSummaryReport {
   backendConnected: boolean;
   localApiAuthReady: boolean;
   dbMigrationFailed: boolean;
+  // Legacy compatibility fields:
+  // taskContinuityScore/taskContinuitySeconds currently carry the durable focus timer
+  // signal used by downstream repos. The canonical product target is focus-episode
+  // quality and focus-episode duration.
   taskContinuityScore: number;
   taskContinuitySeconds: number;
   continuityState: ContinuityState;
   deepWorkActive: boolean;
+  // Legacy visible overload field. The canonical product target is Pressure.
   overloadLikelihood: number;
+  // Canonical meaning is already close to the final product term: overload active.
   overloadActive: boolean;
   breakNeeded: boolean;
+  // Legacy compatibility field. During migration it may still carry action IDs such
+  // as stretch_break_suggestion and break_suggestion, but product-facing surfaces
+  // should map those to short break and long break.
   breakPendingAction?: string | null;
   breakPendingReasonCode?: string | null;
   calibrationStage: CalibrationStage;

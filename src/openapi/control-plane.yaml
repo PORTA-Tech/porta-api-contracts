@@ -1419,9 +1419,11 @@ components:
           type: number
           minimum: 0
           maximum: 1
+          description: Legacy compatibility field for continuity quality. Canonical product meaning is focus-episode quality.
         task_continuity_seconds:
           type: number
           minimum: 0
+          description: Legacy compatibility field for the durable focus timer. Canonical product meaning is focus-episode duration, not foreground-app age.
         continuity_state:
           $ref: '#/components/schemas/ContinuityStateValue'
         deep_work_active:
@@ -1430,13 +1432,16 @@ components:
           type: number
           minimum: 0
           maximum: 1
+          description: Legacy visible overload field. Canonical product meaning is pressure.
         overload_active:
           type: boolean
+          description: Conservative stabilized overload state used for interventions and system actions.
         break_needed:
           type: boolean
         break_pending_action:
           type: string
           nullable: true
+          description: Legacy break transport action ID. During migration it may still carry stretch_break_suggestion or break_suggestion, which map to short break and long break.
         break_pending_reason_code:
           type: string
           nullable: true
@@ -1496,6 +1501,7 @@ components:
           type: string
         action:
           type: string
+          description: Compatibility transport action ID. In particular, stretch_break_suggestion and break_suggestion are legacy action names for short break and long break.
         action_category:
           $ref: '#/components/schemas/MachineActionCategoryValue'
         decision_state:
