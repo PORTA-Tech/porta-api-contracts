@@ -69,6 +69,13 @@ export interface MachineSummaryReport {
   taskContinuitySeconds: number;
   continuityState: ContinuityState;
   deepWorkActive: boolean;
+  // Canonical user-facing pressure signal. This is the expressive pressure
+  // value surfaces should render for humans instead of treating the legacy
+  // overload-likelihood transport field as final truth.
+  pressureLevel: number;
+  // Confidence label should be shown separately from pressure. This field is
+  // the canonical confidence to pair with the displayed pressure value.
+  pressureConfidence: number;
   // Legacy visible overload field. The canonical product target is Pressure.
   overloadLikelihood: number;
   // Canonical meaning is already close to the final product term: overload active.
