@@ -63,10 +63,9 @@ export interface MachineSummaryReport {
   attentionSegmentReasonText?: string | null;
   distractionEpisodeActive: boolean;
   distractionEpisodeSeconds: number;
-  // Legacy compatibility fields:
-  // taskContinuityScore/taskContinuitySeconds currently carry the durable focus timer
-  // signal used by downstream repos. The canonical product target is focus-episode
-  // quality and focus-episode duration.
+  // Legacy compatibility fields mirrored from the canonical focus-episode values
+  // in fleet/admin summaries. Downstream product surfaces should treat these as
+  // transport aliases only, not as an independent source of truth.
   taskContinuityScore: number;
   taskContinuitySeconds: number;
   continuityState: ContinuityState;
@@ -78,7 +77,8 @@ export interface MachineSummaryReport {
   // Confidence label should be shown separately from pressure. This field is
   // the canonical confidence to pair with the displayed pressure value.
   pressureConfidence: number;
-  // Legacy visible overload field. The canonical product target is Pressure.
+  // Legacy compatibility mirror of pressureLevel in fleet/admin summaries.
+  // Product-facing surfaces should not render this as a separate metric.
   overloadLikelihood: number;
   // Canonical meaning is already close to the final product term: overload active.
   overloadActive: boolean;
@@ -86,8 +86,9 @@ export interface MachineSummaryReport {
   // Canonical pending-break kind. Product-facing surfaces should prefer this over
   // parsing the legacy break transport action ID.
   breakPendingKind?: BreakKind | null;
-  // Legacy compatibility field. During migration it may still carry action IDs such
-  // as stretch_break_suggestion and break_suggestion, but product-facing surfaces
+  // Legacy compatibility field mirrored from breakPendingKind in fleet/admin
+  // summaries. During migration it may still carry action IDs such as
+  // stretch_break_suggestion and break_suggestion, but product-facing surfaces
   // should map those to short break and long break.
   breakPendingAction?: string | null;
   breakPendingReasonCode?: string | null;
