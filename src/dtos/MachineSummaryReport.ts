@@ -66,6 +66,8 @@ export interface MachineSummaryReport {
   // Legacy compatibility fields mirrored from the canonical focus-episode values
   // in fleet/admin summaries. Downstream product surfaces should treat these as
   // transport aliases only, not as an independent source of truth.
+  // taskContinuitySeconds always equals focusEpisodeSeconds — it is the durable
+  // episode timer, NOT a live current-app-session timer that resets on foreground-app switch.
   taskContinuityScore: number;
   taskContinuitySeconds: number;
   continuityState: ContinuityState;
