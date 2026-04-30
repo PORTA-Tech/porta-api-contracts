@@ -49,6 +49,10 @@ export interface MachineSummaryReport {
   // Canonical durable focus-episode fields. These are the product-facing fields
   // that operator and fleet surfaces should prefer over the legacy continuity
   // transport aliases below.
+  // focusEpisodeReasonCode / focusEpisodeReasonText are always filled after
+  // canonical normalization. The text explains why the episode is in its current
+  // state (e.g. "Focus episode is on hold during a break.",
+  // "Major context shift ended the focus episode after 5m outside the focus context.").
   focusEpisodeQuality: number;
   focusEpisodeSeconds: number;
   focusEpisodeState: ContinuityState;
@@ -57,6 +61,10 @@ export interface MachineSummaryReport {
   // Canonical current attention-segment fields. These expose whether the machine
   // is in steady focus, a short context excursion, off-task distraction,
   // fragmentation distraction, or away time.
+  // attentionSegmentReasonCode / attentionSegmentReasonText are always filled
+  // after canonical normalization. The text explains why the segment was classified
+  // as it was (e.g. "Away for 6m.", "Stayed outside focus context for 4m.",
+  // "Rapid switching / fragmentation for 3m.").
   attentionSegmentKind: AttentionSegmentKind;
   attentionSegmentSeconds: number;
   attentionSegmentReasonCode?: string | null;
