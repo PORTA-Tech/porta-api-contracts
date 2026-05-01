@@ -36,9 +36,9 @@ export interface MachineActionEvent {
   orgId?: string | null;
   userName: string;
   interventionId: string;
-  // Action is compatibility transport. In particular, break_suggestion and
-  // stretch_break_suggestion remain legacy action IDs until short-break and
-  // long-break overlay naming replaces them end to end.
+  // Action is the canonical action ID. As of Step 12 the break taxonomy uses
+  // short_break and long_break. Legacy IDs break_suggestion and
+  // stretch_break_suggestion are still accepted for historical events.
   action: string;
   actionCategory: MachineActionCategory;
   decisionState: MachineActionDecisionState;
