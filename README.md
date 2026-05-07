@@ -1,5 +1,26 @@
 ﻿# PORTA API Contracts
 
+Shared contracts package for the **Ari** agent platform.
+
+## What Ari Is
+
+**Ari** is a Windows productivity-tracking agent (`porta-agent-windows-x64`). It runs as a Windows service plus two user-session processes, capturing keyboard/mouse metadata, classifying focus/pressure/overload states every 5 seconds, and surfacing real-time data through a floating widget and WPF Control Center. It connects to `porta-control-plane` for policy governance and fleet telemetry.
+
+This repo (`porta-api-contracts`) defines the **shared DTOs and OpenAPI specs** consumed by the control-plane and operations console. The Windows agent uses its own internal contracts in `Porta.Agent.LocalApi` — only the fleet-reporting fields flow through here.
+
+## Agent → Control Plane Data Flow
+
+Every ~10 seconds, the Windows agent reports a machine summary to the control plane:
+- Current focus episode duration, quality, and state
+- Pressure (overload likelihood, 0–1)
+- Baseline calibration stage
+- Break suggestion state
+- Capture quality and channel availability
+
+The control plane evaluates these against policy and may return signed intervention commands (break suggestions, app restrictions, etc.).
+
+---
+
 Shared contracts package for PORTA services.
 
 This repository is the single source of truth for DTOs and OpenAPI specs used by the control-plane and operations console.
